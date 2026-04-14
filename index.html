@@ -13,28 +13,34 @@ body{background:#f0f4f8;min-height:100vh;padding:1rem;font-family:'Noto Sans KR'
 .brand p{font-size:12px;color:#888;margin-top:3px}
 .card{background:#fff;border:1px solid #dde8f0;border-radius:10px;padding:1rem 1.2rem;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .card-title{font-size:12px;font-weight:700;color:#1a5c8a;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.day-block{border:1px solid #dde8f0;border-radius:10px;margin-bottom:10px;overflow:hidden}
+.day-header{background:#1a5c8a;color:#fff;padding:10px 14px;font-size:13px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.day-header .day-sub{font-size:11px;color:rgba(255,255,255,.75);font-weight:400;margin-top:2px}
+.day-header .arrow{font-size:12px;transition:transform .2s}
+.day-header.open .arrow{transform:rotate(180deg)}
+.day-body{padding:12px 14px;background:#fff;display:none}
+.day-body.open{display:block}
+.city-tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:#e8f2fa;color:#1a5c8a;margin-bottom:8px}
+.info-box{background:#e8f2fa;border:1px solid #b3d4ee;border-radius:7px;padding:8px 11px;font-size:12px;color:#0a3d6b;line-height:1.7;margin-bottom:8px}
+.warn-box{background:#fffbe6;border:1px solid #ffe58f;border-radius:7px;padding:8px 11px;font-size:12px;color:#7a5c00;line-height:1.7;margin-bottom:8px}
+.act-section-title{font-size:12px;font-weight:700;color:#555;margin:8px 0 6px}
+.act-grid{display:grid;gap:6px;margin-bottom:8px}
+.act-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border:1px solid #dde8f0;border-radius:7px;background:#fff;cursor:pointer;transition:all .15s}
+.act-item:hover{border-color:#1a5c8a;background:#f0f6fa}
+.act-item.sel{border:1.5px solid #1a5c8a;background:#e8f2fa}
+.act-item .an{font-size:13px;color:#333;font-weight:500}
+.act-item .as{font-size:11px;color:#888;margin-top:1px}
+.act-item .ap{font-size:13px;font-weight:700;color:#1a5c8a;white-space:nowrap;margin-left:8px;flex-shrink:0}
+.act-item.sel .an{color:#1a5c8a}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
 .f{display:flex;flex-direction:column;gap:4px}
 .f label{font-size:12px;color:#555;font-weight:500}
-.f input[type=text],.f input[type=tel],.f select{font-size:13px;padding:7px 9px;border:1px solid #c8d8e8;border-radius:6px;background:#fff;color:#1a1a1a;width:100%}
+.f input,.f select{font-size:13px;padding:7px 9px;border:1px solid #c8d8e8;border-radius:6px;background:#fff;color:#1a1a1a;width:100%}
 .f input:focus,.f select:focus{outline:none;border-color:#1a5c8a}
-.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
-.route-card{border:1px solid #c8d8e8;border-radius:8px;padding:10px 12px;cursor:pointer;transition:all .15s;background:#fff}
-.route-card:hover{border-color:#1a5c8a;background:#f0f6fa}
-.route-card.sel{border:2px solid #1a5c8a;background:#e8f2fa}
-.route-card h3{font-size:13px;font-weight:700;color:#1a3a5c;margin-bottom:3px}
-.route-card p{font-size:11px;color:#888;line-height:1.5}
-.route-card.sel h3{color:#1a5c8a}
-.city-block{background:#f5f9fc;border:1px solid #dde8f0;border-radius:8px;padding:10px 12px;margin-bottom:8px}
-.city-label{font-size:12px;font-weight:700;color:#1a5c8a;margin-bottom:8px}
-.act-grid{display:grid;grid-template-columns:1fr;gap:6px}
-.act-item{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border:1px solid #dde8f0;border-radius:6px;background:#fff;cursor:pointer;transition:all .15s}
-.act-item:hover{border-color:#1a5c8a;background:#f0f6fa}
-.act-item.sel{border:1.5px solid #1a5c8a;background:#e8f2fa}
-.act-item .act-name{font-size:13px;color:#333;font-weight:500}
-.act-item .act-sub{font-size:11px;color:#888;margin-top:1px}
-.act-item .act-price{font-size:13px;font-weight:700;color:#1a5c8a;white-space:nowrap;margin-left:10px}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eef4f8}
+.rg{display:flex;gap:7px;flex-wrap:wrap}
+.rg label{display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;padding:5px 11px;border:1px solid #c8d8e8;border-radius:6px;background:#fff;color:#333}
+.rg label.on{border:1.5px solid #1a5c8a;background:#e8f2fa;color:#1a3a5c;font-weight:600}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eef4f8}
 .toggle-row:last-child{border-bottom:none}
 .tl{font-size:13px;color:#333;font-weight:500}
 .ts{font-size:11px;color:#888;margin-top:2px}
@@ -42,9 +48,18 @@ body{background:#f0f4f8;min-height:100vh;padding:1rem;font-family:'Noto Sans KR'
 .tt.on{background:#1a5c8a}
 .tt::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .2s}
 .tt.on::after{transform:translateX(14px)}
-.warn{background:#fffbe6;border:1px solid #ffe58f;border-radius:7px;padding:7px 11px;font-size:12px;color:#7a5c00;line-height:1.6;margin:6px 0;display:none}
-.warn.show{display:block}
-.info-box{background:#e8f2fa;border:1px solid #b3d4ee;border-radius:7px;padding:7px 11px;font-size:12px;color:#0a3d6b;line-height:1.6;margin:6px 0}
+.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.route-card{border:1px solid #c8d8e8;border-radius:8px;padding:10px 12px;cursor:pointer;transition:all .15s;background:#fff}
+.route-card:hover{border-color:#1a5c8a}
+.route-card.sel{border:2px solid #1a5c8a;background:#e8f2fa}
+.route-card h3{font-size:13px;font-weight:700;color:#1a3a5c;margin-bottom:3px}
+.route-card p{font-size:11px;color:#888;line-height:1.5}
+.route-card.sel h3{color:#1a5c8a}
+.iti-toggle{margin-top:6px}
+.iti-btn{width:100%;padding:8px;border:1px dashed #c8d8e8;border-radius:6px;background:transparent;font-size:12px;color:#1a5c8a;cursor:pointer;text-align:center}
+.iti-btn:hover{background:#f0f6fa}
+.iti-img{display:none;margin-top:8px;text-align:center}
+.iti-img img{max-width:100%;border-radius:8px;border:1px solid #dde8f0}
 .result-box{background:#1a5c8a;border-radius:12px;padding:1.25rem;color:#fff;margin-bottom:12px}
 .rs{margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.2)}
 .rs:last-child{border-bottom:none;margin-bottom:0}
@@ -57,593 +72,641 @@ body{background:#f0f4f8;min-height:100vh;padding:1rem;font-family:'Noto Sans KR'
 .btn-row{display:flex;gap:8px;margin-bottom:8px}
 .cta{flex:1;padding:13px;background:#1a5c8a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer}
 .cta:hover{background:#154d77}
-.cta-pdf{flex:1;padding:13px;background:#fff;color:#1a5c8a;border:2px solid #1a5c8a;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer}
-.cta-pdf:hover{background:#e8f2fa}
+.cta2{flex:1;padding:13px;background:#fff;color:#1a5c8a;border:2px solid #1a5c8a;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer}
+.cta2:hover{background:#e8f2fa}
 .note{font-size:11px;color:#999;text-align:center;margin-top:6px;line-height:1.6}
 .trust{background:#fff;border:1px solid #dde8f0;border-radius:10px;padding:14px 16px;margin-top:12px;text-align:center}
-.trust .t1{font-size:15px;font-weight:700;color:#1a5c8a;margin-bottom:8px}
-.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.trust-item{background:#f0f6fa;border-radius:8px;padding:10px;font-size:13px;color:#1a3a5c;font-weight:600;text-align:center}
-.trust-item span{display:block;font-size:11px;color:#888;font-weight:400;margin-top:2px}
+.trust h3{font-size:15px;font-weight:700;color:#1a5c8a;margin-bottom:8px}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ti{background:#f0f6fa;border-radius:8px;padding:10px;font-size:13px;color:#1a3a5c;font-weight:600;text-align:center}
+.ti span{display:block;font-size:11px;color:#888;font-weight:400;margin-top:2px}
 .hidden{display:none}
-@media print{body{background:#fff;padding:0}.no-print{display:none!important}.card{box-shadow:none;border:1px solid #ddd}.result-box{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{body{background:#fff;padding:0}.no-print{display:none!important}.card,.day-block{box-shadow:none;border:1px solid #ddd}.result-box{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
 <body>
 <div class="w">
-  <div class="brand">
-    <h1>✈️ 등대투어 — 라오스 자유여행 예산 계산기</h1>
-    <p>루트·인원·옵션 선택 후 예상 비용을 즉시 확인하세요 (단위: 원화)</p>
-  </div>
 
-  <!-- 기본 정보 -->
-  <div class="card">
-    <div class="card-title">기본 정보</div>
-    <div class="row2">
-      <div class="f"><label>이름</label><input type="text" id="name" placeholder="홍길동" oninput="calc()"/></div>
-      <div class="f"><label>연락처</label><input type="tel" id="phone" placeholder="010-0000-0000" oninput="calc()"/></div>
-    </div>
-    <div class="row2">
-      <div class="f"><label>희망 출발일</label><input type="date" id="startdate" onchange="calc()"/></div>
-      <div class="f"><label>여행 인원</label>
-        <select id="pax" onchange="calc()">
-          <option value="2">2명</option><option value="3">3명</option>
-          <option value="4" selected>4명</option><option value="5">5명</option>
-          <option value="6">6명</option><option value="7">7명</option><option value="8">8명</option>
-        </select>
-      </div>
-    </div>
-  </div>
+<div class="brand">
+  <h1>✈️ 등대투어 — 라오스 자유여행 예산 계산기</h1>
+  <p>루트·인원·옵션 선택 후 예상 비용을 즉시 확인하세요 (단위: 원화 기준)</p>
+</div>
 
-  <!-- 루트 선택 -->
-  <div class="card">
-    <div class="card-title">여행 루트 선택</div>
-    <div style="font-size:12px;color:#888;margin-bottom:10px">※ 모든 루트는 비엔티안 입국 → 비엔티안 출국 기준입니다</div>
-    <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px">3박 5일</div>
-    <div class="route-grid" style="margin-bottom:10px">
-      <div class="route-card sel" id="r-bb" onclick="selectRoute('bb')">
-        <h3>비엔티안 + 방비엥</h3>
-        <p>비엔티안 1박 → 방비엥 2박<br>액티비티 천국 방비엥 집중</p>
-      </div>
-      <div class="route-card" id="r-bl" onclick="selectRoute('bl')">
-        <h3>비엔티안 + 루앙프라방</h3>
-        <p>비엔티안 1박 → 루앙프라방 2박<br>유네스코 세계문화유산 탐방</p>
-      </div>
-    </div>
-    <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px">4박 6일</div>
-    <div class="route-grid">
-      <div class="route-card" id="r-blll" onclick="selectRoute('blll')">
-        <h3>비엔티안 + 루앙프라방 3박</h3>
-        <p>비엔티안 1박 → 루앙프라방 3박<br>루앙프라방 심층 탐방</p>
-      </div>
-      <div class="route-card" id="r-bllb" onclick="selectRoute('bllb')">
-        <h3>비엔티안 + 루앙 1박 + 방비엥 2박</h3>
-        <p>비엔티안 1박 → 루앙 1박 → 방비엥 2박</p>
-      </div>
-    </div>
-    <div class="route-grid" style="margin-top:8px">
-      <div class="route-card" id="r-bllbb" onclick="selectRoute('bllbb')">
-        <h3>비엔티안 + 루앙 2박 + 방비엥 1박</h3>
-        <p>비엔티안 1박 → 루앙 2박 → 방비엥 1박</p>
-      </div>
-      <div></div>
-    </div>
+<!-- 기본 정보 -->
+<div class="card">
+  <div class="card-title">기본 정보</div>
+  <div class="row2">
+    <div class="f"><label>이름</label><input type="text" id="name" placeholder="홍길동" oninput="calc()"/></div>
+    <div class="f"><label>연락처</label><input type="tel" id="phone" placeholder="010-0000-0000" oninput="calc()"/></div>
   </div>
-
-  <!-- 숙소 선택 -->
-  <div class="card" id="hotel-section">
-    <div class="card-title">숙소 선택</div>
-    <div id="hotel-fields"></div>
-  </div>
-
-  <!-- 비엔티안 일정 -->
-  <div class="card">
-    <div class="card-title">비엔티안 일정</div>
-    <div class="city-block">
-      <div class="city-label">📍 비엔티안 — 포함 서비스</div>
-      <div class="info-box">공항 픽업 · 4대 유적지 현지 가이드 동행 · 공항 센딩이 기본 포함됩니다.</div>
-      <div style="font-size:12px;font-weight:600;color:#555;margin-bottom:6px;margin-top:8px">추가 선택</div>
-      <div class="act-grid">
-        <div class="act-item" id="a-vte-boat" onclick="toggleAct('vte-boat')">
-          <div><div class="act-name">탕온 유원지 선상 식사</div><div class="act-sub">인당 $10 (15,500원)</div></div>
-          <div class="act-price" id="p-vte-boat">—</div>
-        </div>
-        <div class="act-item" id="a-vte-museum" onclick="toggleAct('vte-museum')">
-          <div><div class="act-name">라오 아트 뮤지엄</div><div class="act-sub">입장료 인당 220,000킵 (개별 납부)</div></div>
-          <div class="act-price">참고</div>
-        </div>
-      </div>
-      <div class="info-box" style="margin-top:8px">
-        <strong>입장료 안내 (현장 개별 납부)</strong><br>
-        4대 유적지 인당 30,000킵 · 라오 아트 뮤지엄 인당 220,000킵 · 불상공원 인당 60,000킵
-      </div>
-    </div>
-  </div>
-
-  <!-- 방비엥 일정 -->
-  <div class="card hidden" id="section-vv">
-    <div class="card-title">방비엥 액티비티 선택</div>
-    <div class="city-block">
-      <div class="city-label">📍 방비엥 — 1일차 오후 액티비티</div>
-      <div class="act-grid" id="vv-act1"></div>
-    </div>
-    <div class="city-block" id="vv-day2-block">
-      <div class="city-label">📍 방비엥 — 2일차 전일 액티비티</div>
-      <div class="act-grid" id="vv-act2"></div>
-    </div>
-  </div>
-
-  <!-- 루앙프라방 일정 -->
-  <div class="card hidden" id="section-lp">
-    <div class="card-title">루앙프라방 투어 선택</div>
-    <div class="city-block">
-      <div class="city-label">📍 루앙프라방 — 1일차 투어</div>
-      <div class="act-grid" id="lp-act1"></div>
-    </div>
-    <div class="city-block" id="lp-day2-block">
-      <div class="city-label">📍 루앙프라방 — 2일차 투어</div>
-      <div class="act-grid" id="lp-act2"></div>
-    </div>
-    <div class="city-block hidden" id="lp-day3-block">
-      <div class="city-label">📍 루앙프라방 — 3일차 투어</div>
-      <div class="act-grid" id="lp-act3"></div>
-    </div>
-    <div style="margin-top:8px">
-      <div class="toggle-row">
-        <div><div class="tl">선상 프라이빗 보트 렌트</div><div class="ts">배당 $60 (93,000원) — 인원 무관</div></div>
-        <div class="tt" id="t-boat" onclick="toggleOpt('boat')"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 추가 옵션 -->
-  <div class="card">
-    <div class="card-title">추가 옵션</div>
-    <div class="toggle-row">
-      <div><div class="tl">한국인 가이드 동행</div><div class="ts" id="sub-guide">$100/일 — 전일정 동행</div></div>
-      <div class="tt" id="t-guide" onclick="toggleOpt('guide')"></div>
-    </div>
-    <div class="toggle-row">
-      <div><div class="tl">마사지 (건식 1시간 30분)</div><div class="ts" id="sub-massage">인당 $10 (15,500원) + 팁 30,000킵 개별</div></div>
-      <div class="tt" id="t-massage" onclick="toggleOpt('massage')"></div>
-    </div>
-    <div id="massage-days-row" style="display:none;padding:6px 0">
-      <div class="f"><label>마사지 횟수 (총)</label>
-        <select id="massage-days" onchange="calc()" style="max-width:120px">
-          <option value="1">1회</option><option value="2" selected>2회</option>
-          <option value="3">3회</option><option value="4">4회</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <!-- 견적 결과 -->
-  <div class="result-box">
-    <div class="rs">
-      <div class="rs-t">기본 정보</div>
-      <div class="rr"><span class="lb">고객명</span><span id="r-name">—</span></div>
-      <div class="rr"><span class="lb">연락처</span><span id="r-phone">—</span></div>
-      <div class="rr"><span class="lb">출발일</span><span id="r-date">—</span></div>
-      <div class="rr"><span class="lb">루트 / 인원</span><span id="r-route">—</span></div>
-    </div>
-    <div class="rs">
-      <div class="rs-t">숙박</div>
-      <div id="r-hotel-rows"></div>
-    </div>
-    <div class="rs">
-      <div class="rs-t">교통 (열차 · 차량)</div>
-      <div id="r-trans-rows"></div>
-    </div>
-    <div class="rs">
-      <div class="rs-t">투어 · 액티비티</div>
-      <div id="r-act-rows"></div>
-    </div>
-    <div class="rs">
-      <div class="rs-t">가이드 · 허가증</div>
-      <div id="r-guide-rows"></div>
-    </div>
-    <div class="rs">
-      <div class="rs-t">추가 옵션</div>
-      <div id="r-extra-rows"></div>
-    </div>
-    <div class="total-row">
-      <div>
-        <div style="font-size:13px;color:rgba(255,255,255,.8)">예상 총 비용 (팀 전체)</div>
-        <div class="per" id="r-per">1인당 약 0원</div>
-      </div>
-      <div class="tv" id="r-total">0원</div>
-    </div>
-  </div>
-
-  <div class="btn-row no-print">
-    <button class="cta" onclick="sendKakao()">견적 결과 카카오톡 문의</button>
-    <button class="cta-pdf" onclick="window.print()">PDF 저장 / 인쇄</button>
-  </div>
-  <div class="note">※ 위 금액은 예상 견적으로 시즌·환율에 따라 달라질 수 있습니다<br>국제선 항공권 및 여행자보험은 포함되지 않습니다</div>
-
-  <div class="trust">
-    <div class="t1">🏆 등대투어를 선택하는 이유</div>
-    <div class="trust-grid">
-      <div class="trust-item">누적 2,000팀 진행<span>라오스 자유여행 전문</span></div>
-      <div class="trust-item">네이버 카페 후기 1,000건<span>실제 고객 생생 후기</span></div>
-      <div class="trust-item">현지 직영 운영<span>중간 마진 없는 직거래</span></div>
-      <div class="trust-item">한국어 전담 상담<span>카카오톡 즉시 응답</span></div>
+  <div class="row2">
+    <div class="f"><label>희망 출발일</label><input type="date" id="startdate" onchange="calc()"/></div>
+    <div class="f"><label>여행 인원</label>
+      <select id="pax" onchange="onPaxChange()">
+        <option value="2">2명</option><option value="3">3명</option>
+        <option value="4" selected>4명</option><option value="5">5명</option>
+        <option value="6">6명</option><option value="7">7명</option><option value="8">8명</option>
+      </select>
     </div>
   </div>
 </div>
 
+<!-- 루트 선택 -->
+<div class="card">
+  <div class="card-title">여행 루트 선택</div>
+  <div style="font-size:12px;color:#888;margin-bottom:6px">※ 모든 루트는 비엔티안 입국 → 비엔티안 출국 기준</div>
+  <div style="font-size:12px;background:#fff8e6;border:1px solid #ffe082;border-radius:7px;padding:7px 11px;color:#7a5c00;line-height:1.65;margin-bottom:10px">아래 일정은 <strong>대표 일정</strong>으로, 실제 일정은 인원·일정·요청사항에 따라 달라질 수 있습니다.<br>맞춤 일정 문의는 <strong>카카오톡으로 연락</strong>해 주세요.</div>
+  <div style="font-size:12px;font-weight:700;color:#444;margin-bottom:6px">3박 5일</div>
+  <div class="route-grid" style="margin-bottom:10px">
+    <div class="route-card sel" id="rc-bb" onclick="selectRoute('bb')">
+      <h3>비엔티안 + 방비엥</h3>
+      <p>비엔티안 1박 → 방비엥 2박<br>액티비티 중심 여행</p>
+      <div class="iti-toggle">
+        <button class="iti-btn" onclick="toggleIti(event,'iti-bb')">일정표 보기 ▼</button>
+        <div class="iti-img" id="iti-bb"><img src="img/iti_bb.png" alt="일정표" onerror="this.parentNode.innerHTML='<p style=\"font-size:11px;color:#888;padding:8px\">이미지를 불러오는 중입니다. GitHub img 폴더에 파일을 업로드해 주세요.<br>파일명: iti_bb.png</p>'"/></div>
+      </div>
+    </div>
+    <div class="route-card" id="rc-bl" onclick="selectRoute('bl')">
+      <h3>비엔티안 + 루앙프라방</h3>
+      <p>비엔티안 1박 → 루앙프라방 2박<br>유네스코 문화유산 탐방</p>
+      <div class="iti-toggle">
+        <button class="iti-btn" onclick="toggleIti(event,'iti-bl')">일정표 보기 ▼</button>
+        <div class="iti-img" id="iti-bl"><img src="img/iti_bl.png" alt="일정표" onerror="this.parentNode.innerHTML='<p style=\"font-size:11px;color:#888;padding:8px\">이미지를 불러오는 중입니다. GitHub img 폴더에 파일을 업로드해 주세요.<br>파일명: iti_bl.png</p>'"/></div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:12px;font-weight:700;color:#444;margin-bottom:6px">4박 6일</div>
+  <div class="route-grid" style="margin-bottom:8px">
+    <div class="route-card" id="rc-blll" onclick="selectRoute('blll')">
+      <h3>비엔티안 + 루앙프라방 3박</h3>
+      <p>비엔티안 1박 → 루앙프라방 3박<br>루앙프라방 심층 탐방</p>
+      <div class="iti-toggle">
+        <button class="iti-btn" onclick="toggleIti(event,'iti-blll')">일정표 보기 ▼</button>
+        <div class="iti-img" id="iti-blll"><img src="img/iti_blll.png" alt="일정표" onerror="this.parentNode.innerHTML='<p style=\"font-size:11px;color:#888;padding:8px\">이미지를 불러오는 중입니다. GitHub img 폴더에 파일을 업로드해 주세요.<br>파일명: iti_blll.png</p>'"/></div>
+      </div>
+    </div>
+    <div class="route-card" id="rc-bllb" onclick="selectRoute('bllb')">
+      <h3>비엔티안 + 루앙 1박 + 방비엥 2박</h3>
+      <p>비→루앙 1박→방비엥 2박</p>
+      <div class="iti-toggle">
+        <button class="iti-btn" onclick="toggleIti(event,'iti-bllb')">일정표 보기 ▼</button>
+        <div class="iti-img" id="iti-bllb"><img src="img/iti_bllb.png" alt="일정표" onerror="this.parentNode.innerHTML='<p style=\"font-size:11px;color:#888;padding:8px\">이미지를 불러오는 중입니다. GitHub img 폴더에 파일을 업로드해 주세요.<br>파일명: iti_bllb.png</p>'"/></div>
+      </div>
+    </div>
+  </div>
+  <div class="route-grid">
+    <div class="route-card" id="rc-bllbb" onclick="selectRoute('bllbb')">
+      <h3>비엔티안 + 루앙 2박 + 방비엥 1박</h3>
+      <p>비→루앙 2박→방비엥 1박</p>
+      <div class="iti-toggle">
+        <button class="iti-btn" onclick="toggleIti(event,'iti-bllbb')">일정표 보기 ▼</button>
+        <div class="iti-img" id="iti-bllbb"><img src="img/iti_bllbb.png" alt="일정표" onerror="this.parentNode.innerHTML='<p style=\"font-size:11px;color:#888;padding:8px\">이미지를 불러오는 중입니다. GitHub img 폴더에 파일을 업로드해 주세요.<br>파일명: iti_bllbb.png</p>'"/></div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</div>
+
+<!-- 숙소 선택 -->
+<div class="card">
+  <div class="card-title">숙소 선택</div>
+  <div id="hotel-fields"></div>
+</div>
+
+<!-- 일정별 섹션 -->
+<div id="schedule-section"></div>
+
+<!-- 추가 옵션 -->
+<div class="card">
+  <div class="card-title">추가 옵션</div>
+  <div class="toggle-row">
+    <div>
+      <div class="tl">한국인 가이드 동행</div>
+      <div class="ts" id="sub-kr-guide">일 $100 (155,000원) × 전일정 · 숙박/식비 별도 안내 필요</div>
+    </div>
+    <div class="tt" id="t-kr-guide" onclick="toggleOpt('kr-guide')"></div>
+  </div>
+  <div class="toggle-row">
+    <div>
+      <div class="tl">현지인 가이드 동행</div>
+      <div class="ts">일 $60 (93,000원) · 숙박/식비 별도 안내 필요</div>
+    </div>
+    <div class="tt" id="t-lc-guide" onclick="toggleOpt('lc-guide')"></div>
+  </div>
+  <div id="guide-notice" class="warn-box hidden" style="margin-top:6px">
+    ※ 현지인 가이드 숙박·식비는 일정에 따라 상이합니다. 견적 문의 시 담당자가 별도 안내해 드립니다.
+  </div>
+  <div class="toggle-row">
+    <div>
+      <div class="tl">마사지 (건식 1시간 30분)</div>
+      <div class="ts">인당 $10 (15,500원) · 팁 30,000킵 개별 납부</div>
+    </div>
+    <div class="tt" id="t-massage" onclick="toggleOpt('massage')"></div>
+  </div>
+  <div id="massage-opt" class="hidden" style="padding:6px 0">
+    <div class="f"><label>마사지 횟수</label>
+      <select id="massage-cnt" onchange="calc()" style="max-width:120px">
+        <option value="1">1회</option><option value="2" selected>2회</option>
+        <option value="3">3회</option><option value="4">4회</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- 견적 결과 -->
+<div class="result-box">
+  <div class="rs">
+    <div class="rs-t">기본 정보</div>
+    <div class="rr"><span class="lb">고객명</span><span id="r-name">—</span></div>
+    <div class="rr"><span class="lb">연락처</span><span id="r-phone">—</span></div>
+    <div class="rr"><span class="lb">출발일</span><span id="r-date">—</span></div>
+    <div class="rr"><span class="lb">루트 / 인원</span><span id="r-route">—</span></div>
+  </div>
+  <div class="rs">
+    <div class="rs-t">숙박</div>
+    <div id="r-hotel"></div>
+  </div>
+  <div class="rs">
+    <div class="rs-t">교통 (열차 · 차량)</div>
+    <div id="r-trans"></div>
+  </div>
+  <div class="rs">
+    <div class="rs-t">비엔티안 유적지 투어</div>
+    <div class="rr"><span class="lb">현지 가이드 반일 (기본 포함)</span><span>75,000원</span></div>
+    <div id="r-vte-extra"></div>
+  </div>
+  <div class="rs">
+    <div class="rs-t">방비엥 액티비티</div>
+    <div id="r-vv"></div>
+  </div>
+  <div class="rs">
+    <div class="rs-t">루앙프라방 투어</div>
+    <div id="r-lp"></div>
+  </div>
+  <div class="rs">
+    <div class="rs-t">가이드 · 허가증</div>
+    <div id="r-guide"></div>
+  </div>
+  <div class="rs">
+    <div class="rs-t">추가 옵션</div>
+    <div id="r-extra"></div>
+  </div>
+  <div class="total-row">
+    <div>
+      <div style="font-size:13px;color:rgba(255,255,255,.8)">예상 총 비용 (팀 전체)</div>
+      <div class="per" id="r-per">1인당 약 0원</div>
+    </div>
+    <div class="tv" id="r-total">0원</div>
+  </div>
+</div>
+
+<div class="btn-row no-print">
+  <button class="cta" onclick="sendKakao()">견적 결과 카카오톡 문의</button>
+  <button class="cta2" onclick="window.print()">PDF 저장 / 인쇄</button>
+</div>
+<div class="note">※ 위 금액은 예상 견적으로 시즌·환율에 따라 달라질 수 있습니다<br>국제선 항공권 및 여행자보험은 포함되지 않습니다</div>
+
+<div class="trust">
+  <h3>🏆 등대투어를 선택하는 이유</h3>
+  <div class="tg">
+    <div class="ti">누적 2,000팀 진행<span>라오스 자유여행 전문</span></div>
+    <div class="ti">네이버 카페 후기 1,000건<span>실제 고객 생생 후기</span></div>
+    <div class="ti">현지 직영 운영<span>중간 마진 없는 직거래</span></div>
+    <div class="ti">한국어 전담 상담<span>카카오톡 즉시 응답</span></div>
+  </div>
+</div>
+
+</div><!-- .w -->
+
 <script>
-// ===================== 단가 데이터 =====================
-var KRW = 1550; // $1 = 1,550원
-var KIP_TO_KRW = 1550/21000; // 1킵 = 원화
+var KRW=1550;
+function won(usd){return Math.round(usd*KRW);}
+function fmt(n){return Math.round(n).toLocaleString()+'원';}
 
-// 비엔티안 호텔
-var VTE_HOTELS = [
-  {n:'두엉찬 (2성급)', usd:25},
-  {n:'다오사반 (3성급)', usd:35},
-  {n:'그랜드 (4성급)', usd:50},
-  {n:'유은 (4성급)', usd:50},
-  {n:'민트라 (4성급)', usd:65},
-  {n:'무엉탄 (5성급)', usd:60},
-  {n:'아마리 비엔티안 (5성급)', usd:90}
+/* ── 단가 ── */
+var VTE_HOTELS=[
+  {n:'두엉찬 (2성급)',usd:25},{n:'다오사반 (3성급)',usd:35},
+  {n:'그랜드 (4성급)',usd:50},{n:'유은 (4성급)',usd:50},
+  {n:'민트라 (4성급)',usd:65},{n:'무엉탄 (5성급)',usd:60},
+  {n:'아마리 비엔티안 (5성급)',usd:90}
 ];
-// 방비엥 호텔
-var VV_HOTELS = [
-  {n:'실버나가 호텔', usd:60},
-  {n:'아마리 방비엥 (디럭스)', usd:85},
-  {n:'아마리 방비엥 (스위트)', usd:120}
+var VV_HOTELS=[
+  {n:'실버나가 호텔',usd:60},
+  {n:'아마리 방비엥 (디럭스)',usd:85},
+  {n:'아마리 방비엥 (스위트)',usd:120}
 ];
-// 루앙프라방 호텔 (앙통 고정)
-var LP_HOTEL = {n:'앙통 호텔', usd:60};
+var LP_HOTEL={n:'앙통 호텔',usd:60};
 
-// 방비엥 액티비티 (인당 원화, 킵 기준 판매가)
-var VV_ACTS = [
-  {id:'vv1', n:'카약 (반일)', sub:'반일', krw:9000},
-  {id:'vv2', n:'카약+탐논 동굴 (반일)', sub:'반일', krw:18000},
-  {id:'vv3', n:'카약+블루라군1 (반일)', sub:'반일', krw:30000},
-  {id:'vv4', n:'짚라인 (반일)', sub:'반일', krw:21000},
-  {id:'vv5', n:'짚라인+카약 (반일)', sub:'반일', krw:29000},
-  {id:'vv6', n:'짚라인+탐논 동굴 (반일)', sub:'반일', krw:29000},
-  {id:'vv7', n:'짚라인+블루라군1 (반일)', sub:'반일', krw:29000},
-  {id:'vv8', n:'버기카(2인1대)+블루라군1+3', sub:'반일, 대당 93,000원', krw:93000, perCar:true},
-  {id:'vv9', n:'카약+탐논+블루라군1 (전일)', sub:'전일, 점심포함', krw:32000},
-  {id:'vv10', n:'짚라인+카약+탐논+블루라군1 (전일)', sub:'전일, 점심포함', krw:40000},
-  {id:'vv11', n:'짚라인+카약+탐남/탐쌍+블루라군1 (전일)', sub:'전일, 점심포함', krw:45000},
-  {id:'vv12', n:'짚라인+카약+탐논+블루라군3 (전일)', sub:'전일, 4인이상, 점심포함', krw:52000, minPax:4}
+/* 방비엥 반일 */
+var VV_HALF=[
+  {id:'vh1',n:'버기카(2인 1대) + 블루라군 1+3',sub:'반일 · 대당 71,000원 · 길 안내 가이드 포함',krw:71000,perCar:true},
+  {id:'vh2',n:'짚라인 + 카약',sub:'반일 · 인당',krw:29000}
+];
+/* 방비엥 전일 */
+var VV_FULL=[
+  {id:'vf1',n:'카약 + 탐논동굴 + 블루라군1',sub:'전일 · 점심포함 · 인당',krw:32000},
+  {id:'vf2',n:'짚라인 + 카약 + 탐논동굴 + 블루라군1',sub:'전일 · 점심포함 · 인당',krw:40000},
+  {id:'vf3',n:'짚라인 + 카약 + 탐남/탐쌍동굴 + 블루라군1',sub:'전일 · 점심포함 · 인당',krw:45000},
+  {id:'vf4',n:'짚라인 + 카약 + 탐논동굴 + 블루라군3',sub:'전일 · 점심포함 · 4인이상 · 인당',krw:52000,minPax:4},
+  {id:'vf5',n:'[원더플] 카약 + 천사동굴 + 물동굴 + 블루라군1',sub:'전일 · 인당',krw:33000},
+  {id:'vf6',n:'[원더플] 카약 + 천사동굴 + 물동굴 + 짚라인',sub:'전일 · 인당',krw:42000},
+  {id:'vf7',n:'[원더플] 카약 + 천사동굴 + 물동굴 + 짚라인 + 블루라군1',sub:'전일 · 인당',krw:51000}
 ];
 
-// 루앙프라방 투어 (차량 1대 기준, 원화)
-// 드롭 위치: Hotel or Train Station
-var LP_TOURS = [
-  {id:'lp1', n:'시내 유적지 투어', sub:'왕궁박물관·왓씨엥통 등 → 호텔 드롭', krw:65000, toTrain:false},
-  {id:'lp2', n:'시내 유적지 투어 → 기차역', sub:'왕궁박물관·왓씨엥통 등 → 기차역', krw:86000, toTrain:true},
-  {id:'lp3', n:'꽝시폭포 투어', sub:'꽝시폭포 → 호텔 드롭', krw:65000, toTrain:false},
-  {id:'lp4', n:'꽝시폭포 → 기차역', sub:'꽝시폭포 → 기차역', krw:86000, toTrain:true},
-  {id:'lp5', n:'꽝시폭포+코끼리캠프', sub:'꽝시+코끼리캠프+라이스팜 → 호텔', krw:72000, toTrain:false},
-  {id:'lp6', n:'꽝시폭포+코끼리캠프 → 기차역', sub:'꽝시+코끼리캠프+라이스팜 → 기차역', krw:93000, toTrain:true},
-  {id:'lp7', n:'빡우동굴+위스키마을', sub:'빡우동굴+위스키마을 → 호텔', krw:65000, toTrain:false},
-  {id:'lp8', n:'빡우동굴+위스키마을 → 기차역', sub:'빡우동굴+위스키마을 → 기차역', krw:86000, toTrain:true},
-  {id:'lp9', n:'꽝시+빡우+위스키마을 (전일)', sub:'꽝시+빡우동굴+위스키마을 → 호텔', krw:129000, toTrain:false},
-  {id:'lp10', n:'꽝시+빡우+위스키마을 → 기차역', sub:'꽝시+빡우동굴+위스키마을 → 기차역', krw:150000, toTrain:true},
-  {id:'lp11', n:'시내 유적지+다운타운 투어', sub:'시내 유적지·OPT 등 → 호텔', krw:65000, toTrain:false},
-  {id:'lp12', n:'시내 유적지+다운타운 → 기차역', sub:'시내 유적지·OPT 등 → 기차역', krw:86000, toTrain:true}
-];
+/* 루앙프라방 차량 투어 (1대 기준) */
+var LP_TOUR_D1_COST=87000; /* 역사픽업→푸시산·야시장→호텔 */
+var LP_TOUR_D2_COST=93000; /* 꽝시+코끼리캠프 → 호텔 */
+var LP_TOUR_D2_TO_TRAIN=108000; /* 꽝시+코끼리캠프 → 기차역 */
+var LP_TOUR_D3_COST=65000;  /* 시내유적지 → 호텔 */
+var LP_TOUR_D3_TO_TRAIN=86000; /* 시내유적지 → 기차역 */
+var LP_BOAT=93000; /* 선상 보트 1대 */
 
-// 루트 정의
-var ROUTES = {
-  bb:  {label:'비엔티안 1박 + 방비엥 2박 (3박5일)', vteNights:1, vvNights:2, lpNights:0, trainVteToLp:false, trainLpToVte:false, trainVteToVv:false, trainVvToVte:false, trainVteToLpCost:0, trainLpToVteCost:0, busVteVv:true},
-  bl:  {label:'비엔티안 1박 + 루앙프라방 2박 (3박5일)', vteNights:1, vvNights:0, lpNights:2, trainVteToLp:true, trainLpToVte:true},
-  blll:{label:'비엔티안 1박 + 루앙프라방 3박 (4박6일)', vteNights:1, vvNights:0, lpNights:3, trainVteToLp:true, trainLpToVte:true},
-  bllb:{label:'비엔티안 1박 + 루앙 1박 + 방비엥 2박 (4박6일)', vteNights:1, vvNights:2, lpNights:1, trainVteToLp:true, trainLpToVv:true, trainVvToVte:true},
-  bllbb:{label:'비엔티안 1박 + 루앙 2박 + 방비엥 1박 (4박6일)', vteNights:1, vvNights:1, lpNights:2, trainVteToLp:true, trainLpToVv:true, trainVvToVte:true}
+/* 열차 */
+var TRAIN_VTE_LP=49000; /* 인당 비엔→루앙 */
+var TRAIN_LP_VV=28200;  /* 인당 루앙→방비엥 */
+var CAR_VTE_VV=186000;  /* 비엔↔방비엥 전용차 1회 */
+
+/* 루트 */
+var ROUTES={
+  bb:  {label:'비엔티안 1박 + 방비엥 2박 (3박5일)',   vteN:1,vvN:2,lpN:0},
+  bl:  {label:'비엔티안 1박 + 루앙프라방 2박 (3박5일)',vteN:1,vvN:0,lpN:2},
+  blll:{label:'비엔티안 1박 + 루앙프라방 3박 (4박6일)',vteN:1,vvN:0,lpN:3},
+  bllb:{label:'비엔티안 1박 + 루앙 1박 + 방비엥 2박 (4박6일)',vteN:1,vvN:2,lpN:1},
+  bllbb:{label:'비엔티안 1박 + 루앙 2박 + 방비엥 1박 (4박6일)',vteN:1,vvN:1,lpN:2}
 };
 
-// 열차 단가
-var TRAIN_VTE_LP = 49000; // 인당 (비엔티안↔루앙프라방 1등석)
-var TRAIN_LP_VV  = 28200; // 인당 (루앙프라방↔방비엥 1등석)
-// 비엔티안↔방비엥 전용차량 (엑셀 참고, 왕복 2회)
-var CAR_VTE_VV_ONE = 186000; // 비→방 1회 전용밴
+var cur='bb';
+var selActs={};
+var opts={'kr-guide':false,'lc-guide':false,massage:false,boat:false};
 
-// 상태
-var currentRoute = 'bb';
-var selActs = {}; // act id -> true/false
-var opts = {guide:false, massage:false, boat:false};
-
-function fmt(n){ return Math.round(n).toLocaleString()+'원'; }
-function usd(d){ return Math.round(d*KRW); }
-
-// 루트 선택
+/* ── 루트 선택 ── */
 function selectRoute(r){
-  currentRoute = r;
-  selActs = {};
+  cur=r; selActs={};
   Object.keys(ROUTES).forEach(function(k){
-    var el = document.getElementById('r-'+k);
-    if(el) el.classList.toggle('sel', k===r);
+    var el=document.getElementById('rc-'+k);
+    if(el) el.classList.toggle('sel',k===r);
   });
   buildHotels();
-  buildActivities();
+  buildSchedule();
   calc();
 }
 
-// 숙소 필드 생성
+function toggleIti(e,id){
+  e.stopPropagation();
+  var el=document.getElementById(id);
+  var btn=e.target;
+  var open=el.style.display==='block';
+  el.style.display=open?'none':'block';
+  btn.textContent=open?'일정표 보기 ▼':'일정표 닫기 ▲';
+}
+
+/* ── 숙소 ── */
 function buildHotels(){
-  var r = ROUTES[currentRoute];
-  var html = '';
-
-  // 비엔티안 (항상)
-  html += '<div class="f" style="margin-bottom:8px"><label>비엔티안 숙소 ('+r.vteNights+'박)</label><select id="h-vte" onchange="calc()">';
-  VTE_HOTELS.forEach(function(h){ html += '<option value="'+h.usd+'">'+h.n+' — $'+h.usd+'/룸</option>'; });
-  html += '</select></div>';
-
-  // 방비엥
-  if(r.vvNights > 0){
-    html += '<div class="f" style="margin-bottom:8px"><label>방비엥 숙소 ('+r.vvNights+'박)</label><select id="h-vv" onchange="calc()">';
-    VV_HOTELS.forEach(function(h){ html += '<option value="'+h.usd+'">'+h.n+' — $'+h.usd+'/룸</option>'; });
-    html += '</select></div>';
+  var r=ROUTES[cur];
+  var pax=+document.getElementById('pax').value;
+  var html='';
+  html+='<div class="f" style="margin-bottom:8px"><label>비엔티안 숙소 ('+r.vteN+'박)</label><select id="h-vte" onchange="calc()">';
+  VTE_HOTELS.forEach(function(h){html+='<option value="'+h.usd+'">'+h.n+' — $'+h.usd+'/룸</option>';});
+  html+='</select></div>';
+  if(r.vvN>0){
+    html+='<div class="f" style="margin-bottom:8px"><label>방비엥 숙소 ('+r.vvN+'박)</label><select id="h-vv" onchange="calc()">';
+    VV_HOTELS.forEach(function(h){html+='<option value="'+h.usd+'">'+h.n+' — $'+h.usd+'/룸</option>';});
+    html+='</select></div>';
   }
-
-  // 루앙프라방
-  if(r.lpNights > 0){
-    html += '<div class="f" style="margin-bottom:8px"><label>루앙프라방 숙소 ('+r.lpNights+'박) — 앙통 호텔 고정</label>';
-    html += '<input type="text" value="앙통 호텔 — $60/룸" readonly style="background:#f5f5f5;color:#888"/></div>';
+  if(r.lpN>0){
+    html+='<div class="f" style="margin-bottom:8px"><label>루앙프라방 숙소 ('+r.lpN+'박) — 앙통 호텔 고정</label>';
+    html+='<input type="text" value="앙통 호텔 — $60/룸" readonly style="background:#f5f5f5;color:#888"/></div>';
   }
-
-  // 객실 타입
-  html += '<div class="f"><label>객실 타입</label>';
-  html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:2px" id="room-group">';
-  html += '<label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;padding:5px 11px;border:1.5px solid #1a5c8a;border-radius:6px;background:#e8f2fa;color:#1a3a5c;font-weight:600"><input type="radio" name="roomtype" value="single" checked onchange="calc()"> 1인 1실</label>';
-  html += '<label style="display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;padding:5px 11px;border:1px solid #c8d8e8;border-radius:6px;background:#fff;color:#333"><input type="radio" name="roomtype" value="double" onchange="calc()"> 2인 1실</label>';
-  html += '</div></div>';
-
-  document.getElementById('hotel-fields').innerHTML = html;
+  html+='<div class="f"><label>객실 타입</label><div class="rg" id="rg-room" style="flex-wrap:nowrap;gap:8px">';
+  html+='<label class="on"><input type="radio" name="roomtype" value="double" checked onchange="updateRg(\'rg-room\');calc()"> 2인 1실 (기본)</label>';
+  html+='<label><input type="radio" name="roomtype" value="single" onchange="updateRg(\'rg-room\');calc()"> 1인 1실</label>';
+  html+='</div></div>';
+  document.getElementById('hotel-fields').innerHTML=html;
 }
 
-// 액티비티 섹션 표시
-function buildActivities(){
-  var r = ROUTES[currentRoute];
-  var hasVV = r.vvNights > 0;
-  var hasLP = r.lpNights > 0;
-
-  document.getElementById('section-vv').classList.toggle('hidden', !hasVV);
-  document.getElementById('section-lp').classList.toggle('hidden', !hasLP);
-
-  if(hasVV){
-    // 방비엥 1일차: 반일 (오후 도착)
-    renderActGrid('vv-act1', VV_ACTS.filter(function(a){ return a.krw <= 32000 || a.perCar; }), 'vv1');
-    // 방비엥 2일차: 전일 or 반일 (2박 이상)
-    var vv2 = document.getElementById('vv-day2-block');
-    if(r.vvNights >= 2){
-      vv2.style.display='block';
-      renderActGrid('vv-act2', VV_ACTS, 'vv2');
-    } else {
-      vv2.style.display='none';
-    }
-  }
-
-  if(hasLP){
-    renderActGrid('lp-act1', LP_TOURS, 'lp1');
-    var lp2 = document.getElementById('lp-day2-block');
-    var lp3 = document.getElementById('lp-day3-block');
-    if(r.lpNights >= 2){
-      lp2.style.display='block';
-      renderActGrid('lp-act2', LP_TOURS, 'lp2');
-    } else { lp2.style.display='none'; }
-    if(r.lpNights >= 3){
-      lp3.style.display='block';
-      renderActGrid('lp-act3', LP_TOURS, 'lp3');
-    } else { lp3.style.display='none'; }
-  }
-}
-
-function renderActGrid(containerId, acts, dayKey){
-  var pax = +document.getElementById('pax').value;
-  var html = '';
-  acts.forEach(function(a){
-    var key = dayKey+'_'+a.id;
-    var isSel = selActs[key] || false;
-    var priceStr = '';
-    if(a.perCar){
-      var cars = Math.ceil(pax/2);
-      priceStr = fmt(a.krw*cars)+'('+cars+'대)';
-    } else {
-      priceStr = fmt(a.krw*pax);
-    }
-    html += '<div class="act-item'+(isSel?' sel':'')+'" id="ai-'+key+'" onclick="toggleAct(\''+key+'\')">';
-    html += '<div><div class="act-name">'+a.n+'</div><div class="act-sub">'+a.sub+(a.minPax?', '+a.minPax+'인 이상':'')+'</div></div>';
-    html += '<div class="act-price">'+priceStr+'</div>';
-    html += '</div>';
+function updateRg(id){
+  document.querySelectorAll('#'+id+' label').forEach(function(l){
+    l.classList.toggle('on',l.querySelector('input').checked);
   });
-  document.getElementById(containerId).innerHTML = html;
 }
 
-function toggleAct(key){
-  selActs[key] = !selActs[key];
-  var el = document.getElementById('ai-'+key);
-  if(el) el.classList.toggle('sel', selActs[key]);
+/* ── 일정 섹션 빌드 ── */
+function buildSchedule(){
+  var r=ROUTES[cur]; var pax=+document.getElementById('pax').value;
+  var html=''; var dayNum=1;
+
+  /* DAY 1 — 입국 */
+  html+=makeDay(dayNum++,'입국일','비엔티안',
+    '<div class="info-box">비엔티안 왓따이 국제공항 입국<br>'+
+    '전용차량 미팅 후 해당 숙소 드롭 → 휴식</div>'+
+    '<div class="info-box"><strong>포함 서비스</strong> : 공항 픽업 (전용차량)</div>',true);
+
+  /* DAY 2 — 비엔티안 */
+  var vteExtra='';
+  if(cur==='bb'){
+    vteExtra='<div class="act-section-title">출국일 선택 옵션 (4일차 방비엥→비엔티안 복귀 후)</div>'+
+      '<div class="act-grid">'+
+      makeActItem('vte-boat','탕온 유원지 선상 식사','중장년층 추천 · 인당 $10 (15,500원)',fmt(won(10)*pax))+
+      makeActItem('vte-museum','라오 아트 뮤지엄','입장료 인당 220,000킵 (현장 개별 납부)','참고')+
+      '</div>'+
+      '<div class="info-box" style="margin-top:4px">입장료는 현장에서 개별 납부 : 4대 유적지 30,000킵 · 라오아트뮤지엄 220,000킵 · 불상공원 60,000킵</div>';
+  } else {
+    vteExtra='<div class="info-box">입장료는 현장에서 개별 납부<br>4대 유적지 30,000킵 · 불상공원 60,000킵</div>';
+  }
+  var vteBody='<span class="city-tag">📍 비엔티안</span>'+
+    '<div class="info-box"><strong>포함 서비스</strong> : 숙소 픽업 → 4대 유적지 투어 (현지 가이드 동행) → '+(r.vvN>0?'방비엥 이동':'비엔티안 역사 드롭')+'<br>'+
+    '<strong>공항 샌딩</strong> 포함 (출국일)</div>'+vteExtra;
+  html+=makeDay(dayNum++,'비엔티안 일정','비엔티안',vteBody,true);
+
+  /* 방비엥 일정 */
+  if(r.vvN>0){
+    /* 방비엥 1일차: 오후 도착 + 반일 액티비티 */
+    var vv1Body='<span class="city-tag">📍 방비엥</span>'+
+      '<div class="info-box">전용차량 방비엥 도착 후 숙소 체크인<br>오후 반일 액티비티 선택</div>'+
+      '<div class="act-section-title">오후 반일 액티비티 선택 (1가지)</div>'+
+      '<div class="act-grid">'+VV_HALF.map(function(a){
+        var price=a.perCar?fmt(a.krw*Math.ceil(pax/2))+'('+Math.ceil(pax/2)+'대)':fmt(a.krw*pax);
+        return makeActItem('vv1_'+a.id,a.n,a.sub,price);
+      }).join('')+'</div>';
+    html+=makeDay(dayNum++,'방비엥 1일차','방비엥',vv1Body,false);
+
+    /* 방비엥 2일차: 전일 (2박 이상일 때) */
+    if(r.vvN>=2){
+      var vv2Body='<span class="city-tag">📍 방비엥</span>'+
+        '<div class="info-box">투어사 미팅 후 전일 액티비티</div>'+
+        '<div class="act-section-title">전일 액티비티 선택 (1가지)</div>'+
+        '<div class="act-grid">'+VV_FULL.map(function(a){
+          if(a.minPax && pax<a.minPax) return '';
+          return makeActItem('vv2_'+a.id,a.n,a.sub,fmt(a.krw*pax));
+        }).join('')+'</div>';
+      html+=makeDay(dayNum++,'방비엥 2일차','방비엥',vv2Body,false);
+    }
+  }
+
+  /* 루앙프라방 일정 */
+  if(r.lpN>0){
+    /* 루앙 1일차: 도착 */
+    var lp1Body='<span class="city-tag">📍 루앙프라방</span>'+
+      '<div class="info-box">고속열차 이용 오후 루앙프라방 도착<br>역사(기차역) 픽업 → 푸시산 → 야시장 관람 → 숙소 드롭</div>'+
+      '<div class="info-box"><strong>포함 서비스</strong> : 역사 픽업 · 저녁 투어 차량 (93,000원/대 포함)</div>';
+    html+=makeDay(dayNum++,'루앙프라방 1일차 (도착)','루앙프라방',lp1Body,false);
+
+    /* 루앙 2일차: 꽝시+코끼리 + 선상 옵션 */
+    var lp2Body='<span class="city-tag">📍 루앙프라방</span>'+
+      '<div class="info-box">새벽 탁발 참관 → 꽝시폭포 + 코끼리캠프 + 물소농장 견학 → 시내 복귀</div>'+
+      '<div class="info-box"><strong>포함 서비스</strong> : 전용차량 투어</div>'+
+      '<div class="act-section-title">선택 옵션</div>'+
+      '<div class="act-grid">'+makeActItem('lp-boat','선상 프라이빗 보트 렌트','저녁 메콩강 선상 투어 · 배당 $60 (93,000원)',fmt(LP_BOAT))+'</div>';
+    html+=makeDay(dayNum++,'루앙프라방 2일차','루앙프라방',lp2Body,false);
+
+    /* 루앙 3일차 (3박 이상): 시내유적지 */
+    if(r.lpN>=3){
+      var lp3Body='<span class="city-tag">📍 루앙프라방</span>'+
+        '<div class="info-box">빡우 동굴 · 위스키마을 · 시내 유적지 투어<br>왕궁박물관 · 왓씨엥통 등 → 저녁 야시장</div>'+
+        '<div class="info-box"><strong>포함 서비스</strong> : 전용차량 투어</div>';
+      html+=makeDay(dayNum++,'루앙프라방 3일차','루앙프라방',lp3Body,false);
+    }
+
+    /* 출발일 (루앙→비엔티안) */
+    var lpLastBody='<span class="city-tag">📍 루앙프라방 → 비엔티안</span>'+
+      '<div class="info-box">숙소 픽업 → 루앙프라방 시내 유적지 투어<br>저녁 고속열차 이용 → 비엔티안 도착 → 공항 샌딩</div>'+
+      '<div class="info-box"><strong>포함 서비스</strong> : 전용차량 투어 · 공항 샌딩</div>';
+    html+=makeDay(dayNum++,'출국일 (루앙프라방 → 비엔티안)','루앙프라방',lpLastBody,false);
+  }
+
+  /* 출국 */
+  html+=makeDay(dayNum,'출국','비엔티안',
+    '<div class="info-box">비엔티안 왓따이 국제공항 출국<br>즐거운 여행을 마치고 귀국! 등대투어를 이용해 주셔서 감사합니다 🙏</div>',true);
+
+  document.getElementById('schedule-section').innerHTML=html;
+  /* 선택 상태 복원 */
+  Object.keys(selActs).forEach(function(k){
+    if(selActs[k]){
+      var el=document.getElementById('ai-'+k);
+      if(el) el.classList.add('sel');
+    }
+  });
+}
+
+function makeDay(num,title,city,body,openDefault){
+  var id='day-body-'+num;
+  return '<div class="day-block">'+
+    '<div class="day-header'+(openDefault?' open':'')+'" onclick="toggleDay(\''+id+'\',this)">'+
+    '<div><div>DAY '+num+' — '+title+'</div><div class="day-sub">'+city+'</div></div>'+
+    '<span class="arrow">'+(openDefault?'▲':'▼')+'</span>'+
+    '</div>'+
+    '<div class="day-body'+(openDefault?' open':'')+'" id="'+id+'">'+body+'</div>'+
+    '</div>';
+}
+
+function makeActItem(id,name,sub,price){
+  var sel=selActs[id]?true:false;
+  return '<div class="act-item'+(sel?' sel':'')+'" id="ai-'+id+'" onclick="toggleAct(\''+id+'\')">'+
+    '<div><div class="an">'+name+'</div><div class="as">'+sub+'</div></div>'+
+    '<div class="ap">'+price+'</div></div>';
+}
+
+function toggleDay(bodyId,header){
+  var body=document.getElementById(bodyId);
+  var isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  header.classList.toggle('open',!isOpen);
+  header.querySelector('.arrow').textContent=isOpen?'▼':'▲';
+}
+
+function toggleAct(id){
+  selActs[id]=!selActs[id];
+  var el=document.getElementById('ai-'+id);
+  if(el) el.classList.toggle('sel',selActs[id]);
   calc();
 }
 
 function toggleOpt(k){
-  opts[k] = !opts[k];
-  document.getElementById('t-'+k).classList.toggle('on', opts[k]);
-  if(k==='massage'){
-    document.getElementById('massage-days-row').style.display = opts[k]?'block':'none';
-  }
+  opts[k]=!opts[k];
+  document.getElementById('t-'+k).classList.toggle('on',opts[k]);
+  if(k==='massage') document.getElementById('massage-opt').classList.toggle('hidden',!opts[k]);
+  if(k==='lc-guide') document.getElementById('guide-notice').classList.toggle('hidden',!opts[k]);
   calc();
 }
 
+function onPaxChange(){ buildSchedule(); calc(); }
+
+/* ── 계산 ── */
 function calc(){
-  var pax = +document.getElementById('pax').value;
-  var r = ROUTES[currentRoute];
-  var roomtype = document.querySelector('input[name=roomtype]:checked') ? document.querySelector('input[name=roomtype]:checked').value : 'single';
+  var pax=+document.getElementById('pax').value;
+  var r=ROUTES[cur];
+  var rtEl=document.querySelector('input[name=roomtype]:checked');
+  var roomtype=rtEl?rtEl.value:'double';
+  var rooms=roomtype==='single'?pax:Math.ceil(pax/2);
+  var total=0;
 
-  document.getElementById('r-name').textContent = document.getElementById('name').value||'—';
-  document.getElementById('r-phone').textContent = document.getElementById('phone').value||'—';
-  var sv = document.getElementById('startdate').value;
-  document.getElementById('r-date').textContent = sv ? sv.replace(/-/g,'.') : '—';
-  document.getElementById('r-route').textContent = r.label + ' / '+pax+'명';
+  /* 기본 정보 */
+  document.getElementById('r-name').textContent=document.getElementById('name').value||'—';
+  document.getElementById('r-phone').textContent=document.getElementById('phone').value||'—';
+  var sv=document.getElementById('startdate').value;
+  document.getElementById('r-date').textContent=sv?sv.replace(/-/g,'.'):'—';
+  document.getElementById('r-route').textContent=r.label+' / '+pax+'명';
 
-  var total = 0;
-  var hotelRows = '', transRows = '', actRows = '', guideRows = '', extraRows = '';
-
-  // ---- 숙박 ----
-  var rooms = roomtype==='single' ? pax : Math.ceil(pax/2);
-  var hVteEl = document.getElementById('h-vte');
-  var hVteUsd = hVteEl ? +hVteEl.value : 50;
-  var hVteKrw = usd(hVteUsd) * rooms * r.vteNights;
-  total += hVteKrw;
-  hotelRows += '<div class="rr"><span class="lb">비엔티안 숙박 ('+rooms+'룸×'+r.vteNights+'박)</span><span>'+fmt(hVteKrw)+'</span></div>';
-
-  if(r.vvNights > 0){
-    var hVvEl = document.getElementById('h-vv');
-    var hVvUsd = hVvEl ? +hVvEl.value : 60;
-    var hVvKrw = usd(hVvUsd) * rooms * r.vvNights;
-    total += hVvKrw;
-    hotelRows += '<div class="rr"><span class="lb">방비엥 숙박 ('+rooms+'룸×'+r.vvNights+'박)</span><span>'+fmt(hVvKrw)+'</span></div>';
+  /* 숙박 */
+  var hotelHtml='';
+  var hVteEl=document.getElementById('h-vte');
+  if(hVteEl){
+    var hVteKrw=won(+hVteEl.value)*rooms*r.vteN;
+    total+=hVteKrw;
+    hotelHtml+='<div class="rr"><span class="lb">비엔티안 ('+rooms+'룸×'+r.vteN+'박)</span><span>'+fmt(hVteKrw)+'</span></div>';
   }
-  if(r.lpNights > 0){
-    var hLpKrw = usd(LP_HOTEL.usd) * rooms * r.lpNights;
-    total += hLpKrw;
-    hotelRows += '<div class="rr"><span class="lb">루앙프라방 숙박 ('+rooms+'룸×'+r.lpNights+'박)</span><span>'+fmt(hLpKrw)+'</span></div>';
+  if(r.vvN>0){
+    var hVvEl=document.getElementById('h-vv');
+    if(hVvEl){
+      var hVvKrw=won(+hVvEl.value)*rooms*r.vvN;
+      total+=hVvKrw;
+      hotelHtml+='<div class="rr"><span class="lb">방비엥 ('+rooms+'룸×'+r.vvN+'박)</span><span>'+fmt(hVvKrw)+'</span></div>';
+    }
   }
+  if(r.lpN>0){
+    var hLpKrw=won(LP_HOTEL.usd)*rooms*r.lpN;
+    total+=hLpKrw;
+    hotelHtml+='<div class="rr"><span class="lb">루앙프라방 앙통 호텔 ('+rooms+'룸×'+r.lpN+'박)</span><span>'+fmt(hLpKrw)+'</span></div>';
+  }
+  document.getElementById('r-hotel').innerHTML=hotelHtml;
 
-  // ---- 교통 ----
-  // 공항 픽업/센딩 차량
-  var pickupKrw = 36000; // 엑셀 기준 공항픽업 36,000원
-  var sendingKrw = 36000;
-  total += pickupKrw + sendingKrw;
-  transRows += '<div class="rr"><span class="lb">공항 픽업·센딩 차량</span><span>'+fmt(pickupKrw+sendingKrw)+'</span></div>';
+  /* 교통 */
+  var transHtml='';
+  var pickKrw=36000; // 픽업만
+  total+=pickKrw;
+  transHtml+='<div class="rr"><span class="lb">공항 픽업</span><span>'+fmt(pickKrw)+'</span></div>';
 
-  // 열차 비엔티안→루앙프라방
-  if(r.trainVteToLp){
-    var t1 = TRAIN_VTE_LP * pax;
-    total += t1;
-    transRows += '<div class="rr"><span class="lb">고속열차 비엔티안→루앙프라방 (1등석×'+pax+'명)</span><span>'+fmt(t1)+'</span></div>';
+  if(cur==='bb'){
+    total+=CAR_VTE_VV*2;
+    transHtml+='<div class="rr"><span class="lb">비엔티안↔방비엥 전용차량 (왕복)</span><span>'+fmt(CAR_VTE_VV*2)+'</span></div>';
   }
-  // 열차 루앙프라방→비엔티안 (bl, blll)
-  if((currentRoute==='bl'||currentRoute==='blll') && r.trainLpToVte){
-    var t2 = TRAIN_VTE_LP * pax;
-    total += t2;
-    transRows += '<div class="rr"><span class="lb">고속열차 루앙프라방→비엔티안 (1등석×'+pax+'명)</span><span>'+fmt(t2)+'</span></div>';
+  if(cur==='bl'||cur==='blll'){
+    var t1=TRAIN_VTE_LP*pax*2;
+    total+=t1;
+    transHtml+='<div class="rr"><span class="lb">고속열차 비엔티안↔루앙프라방 (1등석×'+pax+'명×2)</span><span>'+fmt(t1)+'</span></div>';
   }
-  // 열차 루앙프라방→방비엥
-  if(r.trainLpToVv){
-    var t3 = TRAIN_LP_VV * pax;
-    total += t3;
-    transRows += '<div class="rr"><span class="lb">고속열차 루앙프라방→방비엥 (1등석×'+pax+'명)</span><span>'+fmt(t3)+'</span></div>';
+  if(cur==='bllb'||cur==='bllbb'){
+    var t2=TRAIN_VTE_LP*pax;
+    total+=t2;
+    transHtml+='<div class="rr"><span class="lb">고속열차 비엔티안→루앙프라방 (1등석×'+pax+'명)</span><span>'+fmt(t2)+'</span></div>';
+    var t3=TRAIN_LP_VV*pax;
+    total+=t3;
+    transHtml+='<div class="rr"><span class="lb">고속열차 루앙프라방→방비엥 (1등석×'+pax+'명)</span><span>'+fmt(t3)+'</span></div>';
+    total+=CAR_VTE_VV;
+    transHtml+='<div class="rr"><span class="lb">방비엥→비엔티안 전용차량</span><span>'+fmt(CAR_VTE_VV)+'</span></div>';
   }
-  // 방비엥→비엔티안 전용차량 (bllb, bllbb)
-  if(r.trainVvToVte){
-    total += CAR_VTE_VV_ONE;
-    transRows += '<div class="rr"><span class="lb">방비엥→비엔티안 전용차량</span><span>'+fmt(CAR_VTE_VV_ONE)+'</span></div>';
+  /* 루앙프라방 도착일 차량 */
+  if(r.lpN>0){
+    total+=LP_TOUR_D1_COST;
+    transHtml+='<div class="rr"><span class="lb">루앙프라방 역사 픽업·저녁 투어 차량</span><span>'+fmt(LP_TOUR_D1_COST)+'</span></div>';
   }
-  // 비엔티안→방비엥 전용차량 (bb 루트)
-  if(currentRoute==='bb'){
-    total += CAR_VTE_VV_ONE;
-    transRows += '<div class="rr"><span class="lb">비엔티안→방비엥 전용차량</span><span>'+fmt(CAR_VTE_VV_ONE)+'</span></div>';
-    total += CAR_VTE_VV_ONE; // 방비엥→비엔티안 복귀
-    transRows += '<div class="rr"><span class="lb">방비엥→비엔티안 전용차량 (센딩)</span><span>'+fmt(CAR_VTE_VV_ONE)+'</span></div>';
-  }
+  document.getElementById('r-trans').innerHTML=transHtml;
 
-  // ---- 투어·액티비티 ----
-  // 비엔티안 유적지 현지 가이드 반일 (기본 포함)
-  var lpgKrw = Math.round(77500 * KIP_TO_KRW * 21000/1000)*1000;
-  // 현지 가이드 = 77,500킵 → 원화
-  var vteGuideKrw = Math.round(77500 * (1550/21000));
-  total += vteGuideKrw;
-  actRows += '<div class="rr"><span class="lb">비엔티안 유적지 현지 가이드 (반일)</span><span>'+fmt(vteGuideKrw)+'</span></div>';
-
-  // 비엔티안 선상식사
+  /* 비엔티안 추가 */
+  var vteHtml='';
+  total+=75000; // 현지 가이드 기본
   if(selActs['vte-boat']){
-    var boatVte = usd(10) * pax;
-    total += boatVte;
-    actRows += '<div class="rr"><span class="lb">탕온 선상 식사 ('+pax+'명)</span><span>'+fmt(boatVte)+'</span></div>';
+    var bKrw=won(10)*pax;
+    total+=bKrw;
+    vteHtml+='<div class="rr"><span class="lb">탕온 선상 식사 ('+pax+'명)</span><span>'+fmt(bKrw)+'</span></div>';
   }
+  if(!vteHtml) vteHtml='<div class="rr"><span class="lb" style="color:rgba(255,255,255,.5)">추가 선택 없음</span><span></span></div>';
+  document.getElementById('r-vte-extra').innerHTML=vteHtml;
 
-  // 방비엥 액티비티
-  ['vv1','vv2'].forEach(function(dayKey){
-    VV_ACTS.forEach(function(a){
-      var key = dayKey+'_'+a.id;
-      if(selActs[key]){
-        var cost;
-        if(a.perCar){ cost = a.krw * Math.ceil(pax/2); }
-        else { cost = a.krw * pax; }
-        total += cost;
-        actRows += '<div class="rr"><span class="lb">방비엥 '+a.n+'</span><span>'+fmt(cost)+'</span></div>';
+  /* 방비엥 */
+  var vvHtml='';
+  if(r.vvN>0){
+    VV_HALF.forEach(function(a){
+      var k='vv1_'+a.id;
+      if(selActs[k]){
+        var c=a.perCar?a.krw*Math.ceil(pax/2):a.krw*pax;
+        total+=c; vvHtml+='<div class="rr"><span class="lb">'+a.n+'</span><span>'+fmt(c)+'</span></div>';
       }
     });
-  });
-
-  // 루앙프라방 투어 (차량 1대)
-  ['lp1','lp2','lp3'].forEach(function(dayKey){
-    LP_TOURS.forEach(function(a){
-      var key = dayKey+'_'+a.id;
-      if(selActs[key]){
-        total += a.krw;
-        actRows += '<div class="rr"><span class="lb">루앙프라방 '+a.n+'</span><span>'+fmt(a.krw)+'</span></div>';
+    VV_FULL.forEach(function(a){
+      var k='vv2_'+a.id;
+      if(selActs[k]){
+        var c=a.krw*pax;
+        total+=c; vvHtml+='<div class="rr"><span class="lb">'+a.n+'</span><span>'+fmt(c)+'</span></div>';
       }
     });
-  });
-
-  // 선상 보트
-  if(opts.boat){
-    total += 93000;
-    actRows += '<div class="rr"><span class="lb">선상 프라이빗 보트 렌트</span><span>'+fmt(93000)+'</span></div>';
   }
+  if(!vvHtml) vvHtml='<div class="rr"><span class="lb" style="color:rgba(255,255,255,.5)">'+(r.vvN>0?'선택된 액티비티 없음':'해당 루트 없음')+'</span><span></span></div>';
+  document.getElementById('r-vv').innerHTML=vvHtml;
 
-  if(!actRows) actRows = '<div class="rr"><span class="lb" style="color:rgba(255,255,255,.5)">선택된 액티비티 없음</span><span></span></div>';
-
-  // ---- 가이드·허가증 ----
-  // 여행허가증 (4인 이상 필수)
-  var totalDays = r.vteNights + r.vvNights + r.lpNights;
-  var permitKrw = usd(5) * pax;
-  total += permitKrw;
-  guideRows += '<div class="rr"><span class="lb">여행 허가증 (인당 $5 × '+pax+'명)</span><span>'+fmt(permitKrw)+'</span></div>';
-
-  // 루앙프라방 현지 가이드 (lpNights만큼)
-  if(r.lpNights > 0){
-    var lpGuideKrw = Math.round(93000 * r.lpNights); // 93,000원/일
-    total += lpGuideKrw;
-    guideRows += '<div class="rr"><span class="lb">루앙프라방 현지 가이드 ('+r.lpNights+'일)</span><span>'+fmt(lpGuideKrw)+'</span></div>';
+  /* 루앙프라방 투어 */
+  var lpHtml='';
+  if(r.lpN>0){
+    /* 2일차 */
+    var lp2Cost=r.lpN>=3?LP_TOUR_D2_COST:LP_TOUR_D2_TO_TRAIN;
+    total+=lp2Cost;
+    lpHtml+='<div class="rr"><span class="lb">꽝시폭포+코끼리캠프+물소농장 투어</span><span>'+fmt(lp2Cost)+'</span></div>';
+    /* 선상 보트 */
+    if(selActs['lp-boat']){
+      total+=LP_BOAT;
+      lpHtml+='<div class="rr"><span class="lb">선상 프라이빗 보트 렌트</span><span>'+fmt(LP_BOAT)+'</span></div>';
+    }
+    /* 3일차 (3박) */
+    if(r.lpN>=3){
+      total+=LP_TOUR_D3_COST;
+      lpHtml+='<div class="rr"><span class="lb">빡우동굴+위스키마을 투어</span><span>'+fmt(LP_TOUR_D3_COST)+'</span></div>';
+    }
+    /* 출발일 시내유적지 */
+    total+=LP_TOUR_D3_TO_TRAIN;
+    lpHtml+='<div class="rr"><span class="lb">시내 유적지 투어 → 역사 드롭</span><span>'+fmt(LP_TOUR_D3_TO_TRAIN)+'</span></div>';
+    /* 루앙 현지 가이드 */
+    var lpGuideCost=93000*r.lpN;
+    total+=lpGuideCost;
+    lpHtml+='<div class="rr"><span class="lb">루앙프라방 현지 가이드 ('+r.lpN+'일)</span><span>'+fmt(lpGuideCost)+'</span></div>';
   }
+  if(!lpHtml) lpHtml='<div class="rr"><span class="lb" style="color:rgba(255,255,255,.5)">해당 루트 없음</span><span></span></div>';
+  document.getElementById('r-lp').innerHTML=lpHtml;
 
-  // 한국인 가이드
-  if(opts.guide){
-    var guideKrw = usd(100) * totalDays;
-    total += guideKrw;
-    guideRows += '<div class="rr"><span class="lb">한국인 가이드 ($100×'+totalDays+'일)</span><span>'+fmt(guideKrw)+'</span></div>';
-    // 가이드 숙식
-    var gAccKrw = Math.round(42000 * totalDays);
-    total += gAccKrw;
-    guideRows += '<div class="rr"><span class="lb">가이드 숙식·이동비 ('+totalDays+'일)</span><span>'+fmt(gAccKrw)+'</span></div>';
+  /* 가이드·허가증 */
+  var guideHtml='';
+  var permitKrw=won(5)*pax;
+  total+=permitKrw;
+  guideHtml+='<div class="rr"><span class="lb">여행 허가증 (인당 $5 × '+pax+'명)</span><span>'+fmt(permitKrw)+'</span></div>';
+  document.getElementById('r-guide').innerHTML=guideHtml;
+
+  /* 추가 옵션 */
+  var extraHtml='';
+  var totalDays=r.vteN+r.vvN+r.lpN;
+  if(opts['kr-guide']){
+    var kgKrw=won(100)*totalDays;
+    total+=kgKrw;
+    var kgAccKrw=42000*totalDays;
+    total+=kgAccKrw;
+    extraHtml+='<div class="rr"><span class="lb">한국인 가이드 ($100×'+totalDays+'일)</span><span>'+fmt(kgKrw)+'</span></div>';
+    extraHtml+='<div class="rr"><span class="lb">가이드 숙식·이동비 ('+totalDays+'일)</span><span>'+fmt(kgAccKrw)+'</span></div>';
   }
-
-  // ---- 추가 옵션 ----
+  if(opts['lc-guide']){
+    var lcKrw=won(60)*totalDays;
+    total+=lcKrw;
+    extraHtml+='<div class="rr"><span class="lb">현지인 가이드 ($60×'+totalDays+'일)</span><span>'+fmt(lcKrw)+'</span></div>';
+    extraHtml+='<div class="rr"><span class="lb" style="color:rgba(255,255,255,.6)">※ 숙박·식비 별도 (담당자 안내)</span><span>별도</span></div>';
+  }
   if(opts.massage){
-    var mDays = +document.getElementById('massage-days').value;
-    var massKrw = usd(10) * pax * mDays;
-    total += massKrw;
-    extraRows += '<div class="rr"><span class="lb">마사지 ('+pax+'명×'+mDays+'회)</span><span>'+fmt(massKrw)+'</span></div>';
-    extraRows += '<div class="rr"><span class="lb" style="color:rgba(255,255,255,.6)">※ 팁 30,000킵/인 개별 납부</span><span></span></div>';
+    var mCnt=+document.getElementById('massage-cnt').value;
+    var mKrw=won(10)*pax*mCnt;
+    total+=mKrw;
+    extraHtml+='<div class="rr"><span class="lb">마사지 ('+pax+'명×'+mCnt+'회)</span><span>'+fmt(mKrw)+'</span></div>';
+    extraHtml+='<div class="rr"><span class="lb" style="color:rgba(255,255,255,.6)">※ 팁 30,000킵/인 개별 납부</span><span></span></div>';
   }
-  if(!extraRows) extraRows = '<div class="rr"><span class="lb" style="color:rgba(255,255,255,.5)">선택된 옵션 없음</span><span></span></div>';
+  if(!extraHtml) extraHtml='<div class="rr"><span class="lb" style="color:rgba(255,255,255,.5)">선택된 옵션 없음</span><span></span></div>';
+  document.getElementById('r-extra').innerHTML=extraHtml;
 
-  document.getElementById('r-hotel-rows').innerHTML = hotelRows;
-  document.getElementById('r-trans-rows').innerHTML = transRows;
-  document.getElementById('r-act-rows').innerHTML = actRows;
-  document.getElementById('r-guide-rows').innerHTML = guideRows;
-  document.getElementById('r-extra-rows').innerHTML = extraRows;
-  document.getElementById('r-total').textContent = fmt(total);
-  document.getElementById('r-per').textContent = '1인당 약 '+fmt(Math.round(total/pax));
+  document.getElementById('r-total').textContent=fmt(total);
+  document.getElementById('r-per').textContent='1인당 약 '+fmt(Math.round(total/pax));
 }
 
 function sendKakao(){
-  var lines = [
+  var lines=[
     '=== 등대투어 라오스 자유여행 견적 ===',
     '고객명: '+(document.getElementById('name').value||'미입력'),
     '연락처: '+(document.getElementById('phone').value||'미입력'),
     '출발일: '+(document.getElementById('startdate').value||'미입력'),
-    '루트: '+ROUTES[currentRoute].label,
+    '루트: '+ROUTES[cur].label,
     '인원: '+document.getElementById('pax').value+'명',
     '',
     '예상 총 비용: '+document.getElementById('r-total').textContent,
@@ -651,7 +714,7 @@ function sendKakao(){
     '',
     '* 정확한 견적은 상담을 통해 확인해 주세요.'
   ];
-  var text = lines.join('\n');
+  var text=lines.join('\n');
   if(navigator.clipboard){
     navigator.clipboard.writeText(text).then(function(){
       alert('견적 내용이 클립보드에 복사되었습니다!\n카카오톡 채팅창에 붙여넣기(Ctrl+V) 후 전송해 주세요.');
@@ -662,9 +725,9 @@ function sendKakao(){
   }
 }
 
-// 초기 실행
+/* 초기 실행 */
 buildHotels();
-buildActivities();
+buildSchedule();
 calc();
 </script>
 </body>
