@@ -25,21 +25,24 @@ body{background:#f0f4f8;min-height:100vh;padding:1rem;font-family:'Noto Sans KR'
 .warn-box{background:#fffbe6;border:1px solid #ffe58f;border-radius:7px;padding:8px 11px;font-size:12px;color:#7a5c00;line-height:1.7;margin-bottom:8px}
 .act-section-title{font-size:12px;font-weight:700;color:#555;margin:8px 0 6px}
 .act-grid{display:grid;gap:6px;margin-bottom:8px}
-.act-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border:1px solid #dde8f0;border-radius:7px;background:#fff;cursor:pointer;transition:all .15s}
+.act-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid #dde8f0;border-radius:7px;background:#fff;cursor:pointer;transition:all .15s;gap:10px}
 .act-item:hover{border-color:#1a5c8a;background:#f0f6fa}
-.act-item.sel{border:1.5px solid #1a5c8a;background:#e8f2fa}
+.act-item.sel{border:2px solid #1a5c8a;background:#e8f2fa}
+.act-item .ai-radio{width:18px;height:18px;border-radius:50%;border:2px solid #c8d8e8;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;background:#fff}
+.act-item.sel .ai-radio{border-color:#1a5c8a;background:#1a5c8a}
+.act-item.sel .ai-radio::after{content:'';width:7px;height:7px;border-radius:50%;background:#fff}
+.act-item .ai-info{flex:1;min-width:0}
 .act-item .an{font-size:13px;color:#333;font-weight:500}
-.act-item .as{font-size:11px;color:#888;margin-top:1px}
-.act-item .ap{font-size:13px;font-weight:700;color:#1a5c8a;white-space:nowrap;margin-left:8px;flex-shrink:0}
-.act-item.sel .an{color:#1a5c8a}
-.act-item.sel::before{content:'✓ ';color:#1a5c8a;font-weight:700;font-size:14px}
+.act-item.sel .an{color:#1a5c8a;font-weight:700}
+.act-item .as{font-size:11px;color:#888;margin-top:2px}
+.act-item .ap{font-size:13px;font-weight:700;color:#1a5c8a;white-space:nowrap;flex-shrink:0}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
 .f{display:flex;flex-direction:column;gap:4px}
 .f label{font-size:12px;color:#555;font-weight:500}
 .f input,.f select{font-size:13px;padding:7px 9px;border:1px solid #c8d8e8;border-radius:6px;background:#fff;color:#1a1a1a;width:100%}
 .f input:focus,.f select:focus{outline:none;border-color:#1a5c8a}
 .rg{display:flex;gap:7px;flex-wrap:wrap}
-.rg label{display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;padding:5px 11px;border:1px solid #c8d8e8;border-radius:6px;background:#fff;color:#333}
+.rg label{display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;padding:5px 14px;border:1px solid #c8d8e8;border-radius:6px;background:#fff;color:#333;white-space:nowrap}
 .rg label.on{border:1.5px solid #1a5c8a;background:#e8f2fa;color:#1a3a5c;font-weight:600}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eef4f8}
 .toggle-row:last-child{border-bottom:none}
@@ -592,7 +595,8 @@ function makeDay(num,title,city,body,openDefault){
 function makeActItem(id,name,sub,price){
   var sel=selActs[id]?true:false;
   return '<div class="act-item'+(sel?' sel':'')+'" id="ai-'+id+'" onclick="toggleAct(\''+id+'\')">'+
-    '<div><div class="an">'+name+'</div><div class="as">'+sub+'</div></div>'+
+    '<div class="ai-radio"></div>'+
+    '<div class="ai-info"><div class="an">'+name+'</div><div class="as">'+sub+'</div></div>'+
     '<div class="ap">'+price+'</div></div>';
 }
 
