@@ -422,7 +422,7 @@ function buildSchedule(){
       '<div class="info-box"><strong>포함 서비스</strong> : 숙소 픽업 → 탕온 선상 유원지 → 라오 아트 뮤지엄 → 비엔티안 복귀 후 자유시간 → 공항 샌딩(출국일)</div>'+
       '<div class="act-section-title">출국일 선택 옵션</div>'+
       '<div class="act-grid">'+
-      makeActItem('vte-boat','탕온 유원지 선상 식사','중장년층 추천 · 인당 $10 (15,500원)',fmt(won(10)*pax))+
+      makeActItem('vte-boat','탕온 유원지 선상 식사 (한식 종류 중 선택, 상담 시 안내)','중장년층 추천 · 인당 $10 (15,500원)',fmt(won(10)*pax))+
       makeActItem('vte-museum','라오 아트 뮤지엄','입장료 인당 220,000킵 (현장 개별 납부)','참고')+
       '</div>';
     html+=makeDay(dayNum++,'비엔티안 복귀 + 출국일','비엔티안',bbD4,false);
@@ -450,7 +450,7 @@ function buildSchedule(){
     /* DAY 4: 출국일 */
     var blD4=
       '<span class="city-tag">📍 루앙프라방 → 비엔티안</span>'+
-      '<div class="info-box">숙소 픽업 → 시내 유적지 투어 → 저녁 고속열차 이용 → 비엔티안 도착 → 공항 샌딩</div>'+
+      '<div class="info-box">오전 자유 시간 → 숙소 픽업 → 정오 고속열차 이용 → 비엔티안 역사 도착 → 불상공원 투어 → 시내 복귀 후 자유시간 → 공항 샌딩</div>'+
       '<div class="info-box"><strong>포함 서비스</strong> : 전용차량 투어 · 공항 샌딩</div>';
     html+=makeDay(dayNum++,'출국일 (루앙프라방 → 비엔티안)','루앙프라방 → 비엔티안',blD4,false);
   }
@@ -484,7 +484,7 @@ function buildSchedule(){
     /* DAY 5: 출국일 */
     var blllD5=
       '<span class="city-tag">📍 루앙프라방 → 비엔티안</span>'+
-      '<div class="info-box">숙소 픽업 → 시내 유적지 투어 → 저녁 고속열차 이용 → 비엔티안 도착 → 공항 샌딩</div>'+
+      '<div class="info-box">오전 자유 시간 → 숙소 픽업 → 정오 고속열차 이용 → 비엔티안 역사 도착 → 불상공원 투어 → 시내 복귀 후 자유시간 → 공항 샌딩</div>'+
       '<div class="info-box"><strong>포함 서비스</strong> : 전용차량 투어 · 공항 샌딩</div>';
     html+=makeDay(dayNum++,'출국일 (루앙프라방 → 비엔티안)','루앙프라방 → 비엔티안',blllD5,false);
   }
@@ -499,17 +499,12 @@ function buildSchedule(){
       '<div class="info-box"><strong>루앙프라방 오후 도착</strong> : 고속열차 이용 → 역사 픽업 → 푸시산 → 야시장 관람 → 숙소 드롭</div>';
     html+=makeDay(dayNum++,'비엔티안 일정 + 루앙프라방 1일차','비엔티안 → 루앙프라방',bllbD2,true);
 
-    /* DAY 3: 루앙 → 방비엥 도착 + 반일 */
+    /* DAY 3: 루앙 → 방비엥 (저녁 열차, 반일 없음) */
     var bllbD3=
       '<span class="city-tag">📍 루앙프라방 → 방비엥</span>'+
-      '<div class="info-box"><strong>루앙프라방 오전</strong> : 새벽 탁발 참관 → 꽝시폭포 + 코끼리캠프 견학 → 역사 이동</div>'+
-      '<div class="info-box"><strong>방비엥 오후 도착</strong> : 고속열차 이용 → 방비엥 도착 → 숙소 체크인 후 반일 액티비티</div>'+
-      '<div class="act-section-title">오후 반일 액티비티 선택</div>'+
-      '<div class="act-grid">'+VV_HALF.map(function(a){
-        var price=a.perCar?fmt(a.krw*Math.ceil(pax/2))+'('+Math.ceil(pax/2)+'대)':fmt(a.krw*pax);
-        return makeActItem('vv1_'+a.id,a.n,a.sub,price);
-      }).join('')+'</div>';
-    html+=makeDay(dayNum++,'루앙프라방 2일차 + 방비엥 1일차','루앙프라방 → 방비엥',bllbD3,false);
+      '<div class="info-box"><strong>루앙프라방 오전</strong> : 새벽 탁발 참관 → 꽝시폭포 + 코끼리캠프 견학 → 시내 복귀</div>'+
+      '<div class="info-box"><strong>방비엥 저녁 도착</strong> : 저녁 고속열차 이용 → 방비엥 도착 → 숙소 체크인 · 자유시간</div>';
+    html+=makeDay(dayNum++,'루앙프라방 2일차 + 방비엥 도착','루앙프라방 → 방비엥',bllbD3,false);
 
     /* DAY 4: 방비엥 전일 */
     var bllbD4=
@@ -520,13 +515,18 @@ function buildSchedule(){
         if(a.minPax && pax<a.minPax) return '';
         return makeActItem('vv2_'+a.id,a.n,a.sub,fmt(a.krw*pax));
       }).join('')+'</div>';
-    html+=makeDay(dayNum++,'방비엥 2일차','방비엥',bllbD4,false);
+    html+=makeDay(dayNum++,'방비엥 1일차 (전일)','방비엥',bllbD4,false);
 
-    /* DAY 5: 비엔티안 복귀 + 출국 */
+    /* DAY 5: 방비엥 반일 → 비엔티안 출국 */
     var bllbD5=
-      '<span class="city-tag">📍 비엔티안 복귀 → 출국</span>'+
-      '<div class="info-box">숙소 픽업 → 비엔티안 전용차량 이동 → 자유시간 → 공항 샌딩</div>';
-    html+=makeDay(dayNum++,'비엔티안 복귀 + 출국일','비엔티안',bllbD5,false);
+      '<span class="city-tag">📍 방비엥 → 비엔티안</span>'+
+      '<div class="info-box">오전 반일 액티비티 투어 → 종료 후 비엔티안 전용차량 이동 → 자유시간 → 공항 샌딩</div>'+
+      '<div class="act-section-title">오전 반일 액티비티 선택</div>'+
+      '<div class="act-grid">'+VV_HALF.map(function(a){
+        var price=a.perCar?fmt(a.krw*Math.ceil(pax/2))+'('+Math.ceil(pax/2)+'대)':fmt(a.krw*pax);
+        return makeActItem('vv1_'+a.id,a.n,a.sub,price);
+      }).join('')+'</div>';
+    html+=makeDay(dayNum++,'방비엥 2일차 + 비엔티안 복귀 출국','방비엥 → 비엔티안',bllbD5,false);
   }
 
   /* ── bllbb 루트: 비엔티안 1박 + 루앙 2박 + 방비엥 1박 ── */
@@ -551,7 +551,7 @@ function buildSchedule(){
     /* DAY 4: 루앙 → 방비엥 + 반일 */
     var bllbbD4=
       '<span class="city-tag">📍 루앙프라방 → 방비엥</span>'+
-      '<div class="info-box"><strong>루앙프라방 오전</strong> : 시내 유적지 투어 → 역사 이동</div>'+
+      '<div class="info-box"><strong>루앙프라방 오전</strong> : 자유 시간 → 숙소 픽업 → 루앙프라방 역사 이동</div>'+
       '<div class="info-box"><strong>방비엥 오후 도착</strong> : 고속열차 이용 → 방비엥 도착 → 숙소 체크인 후 반일 액티비티</div>'+
       '<div class="act-section-title">오후 반일 액티비티 선택</div>'+
       '<div class="act-grid">'+VV_HALF.map(function(a){
@@ -560,11 +560,16 @@ function buildSchedule(){
       }).join('')+'</div>';
     html+=makeDay(dayNum++,'루앙프라방 3일차 + 방비엥 1일차','루앙프라방 → 방비엥',bllbbD4,false);
 
-    /* DAY 5: 비엔티안 복귀 + 출국 */
+    /* DAY 5: 방비엥 반일 → 비엔티안 출국 */
     var bllbbD5=
-      '<span class="city-tag">📍 비엔티안 복귀 → 출국</span>'+
-      '<div class="info-box">숙소 픽업 → 비엔티안 전용차량 이동 → 자유시간 → 공항 샌딩</div>';
-    html+=makeDay(dayNum++,'비엔티안 복귀 + 출국일','비엔티안',bllbbD5,false);
+      '<span class="city-tag">📍 방비엥 → 비엔티안</span>'+
+      '<div class="info-box">오전 반일 액티비티 투어 → 비엔티안 전용차량 이동 → 탓루왕·빠뚜싸이 야경 투어 등 자유시간 → 공항 샌딩</div>'+
+      '<div class="act-section-title">오전 반일 액티비티 선택</div>'+
+      '<div class="act-grid">'+VV_HALF.map(function(a){
+        var price=a.perCar?fmt(a.krw*Math.ceil(pax/2))+'('+Math.ceil(pax/2)+'대)':fmt(a.krw*pax);
+        return makeActItem('vv1_'+a.id,a.n,a.sub,price);
+      }).join('')+'</div>';
+    html+=makeDay(dayNum++,'방비엥 + 비엔티안 복귀 출국','방비엥 → 비엔티안',bllbbD5,false);
   }
 
   /* 마지막: 인천공항 도착 */
@@ -677,8 +682,8 @@ function calc(){
     var t1=TRAIN_VTE_LP*pax*2;
     total+=t1;
     transHtml+='<div class="rr"><span class="lb">고속열차 비엔티안↔루앙프라방 (1등석×'+pax+'명×2)</span><span>'+fmt(t1)+'</span></div>';
-    total+=50000;
-    transHtml+='<div class="rr"><span class="lb">출국일 비엔티안 역사 픽업 후 시내·공항 드롭 차량</span><span>50,000원</span></div>';
+    total+=82500;
+    transHtml+='<div class="rr"><span class="lb">출국일 비엔티안 역사 픽업 후 불상공원 관람 후 시내·공항 드롭 차량</span><span>82,500원</span></div>';
   }
   if(cur==='bllb'||cur==='bllbb'){
     var t2=TRAIN_VTE_LP*pax;
@@ -689,11 +694,6 @@ function calc(){
     transHtml+='<div class="rr"><span class="lb">고속열차 루앙프라방→방비엥 (1등석×'+pax+'명)</span><span>'+fmt(t3)+'</span></div>';
     total+=CAR_VTE_VV;
     transHtml+='<div class="rr"><span class="lb">방비엥→비엔티안 전용차량</span><span>'+fmt(CAR_VTE_VV)+'</span></div>';
-  }
-  /* 루앙프라방 도착일 차량 */
-  if(r.lpN>0){
-    total+=LP_TOUR_D1_COST;
-    transHtml+='<div class="rr"><span class="lb">루앙프라방 역사 픽업·저녁 투어 차량</span><span>'+fmt(LP_TOUR_D1_COST)+'</span></div>';
   }
   document.getElementById('r-trans').innerHTML=transHtml;
 
@@ -713,18 +713,23 @@ function calc(){
   /* 방비엥 */
   var vvHtml='';
   if(r.vvN>0){
+    /* bllb/bllbb: 고속열차 방비엥 도착 썽태우 15,000원 */
+    if(cur==='bllb'||cur==='bllbb'){
+      total+=15000;
+      vvHtml+='<div class="rr"><span class="lb">방비엥 역사 → 호텔 드롭 (썽태우)</span><span>15,000원</span></div>';
+    }
     VV_HALF.forEach(function(a){
       var k='vv1_'+a.id;
       if(selActs[k]){
-        var c=a.perCar?a.krw*Math.ceil(pax/2):a.krw*pax;
-        total+=c; vvHtml+='<div class="rr"><span class="lb">'+a.n+'</span><span>'+fmt(c)+'</span></div>';
+        var cv=a.perCar?a.krw*Math.ceil(pax/2):a.krw*pax;
+        total+=cv; vvHtml+='<div class="rr"><span class="lb">'+a.n+'</span><span>'+fmt(cv)+'</span></div>';
       }
     });
     VV_FULL.forEach(function(a){
       var k='vv2_'+a.id;
       if(selActs[k]){
-        var c=a.krw*pax;
-        total+=c; vvHtml+='<div class="rr"><span class="lb">'+a.n+'</span><span>'+fmt(c)+'</span></div>';
+        var cv=a.krw*pax;
+        total+=cv; vvHtml+='<div class="rr"><span class="lb">'+a.n+'</span><span>'+fmt(cv)+'</span></div>';
       }
     });
   }
@@ -734,27 +739,60 @@ function calc(){
   /* 루앙프라방 투어 */
   var lpHtml='';
   if(r.lpN>0){
-    /* 2일차: 탁발+꽝시+코끼리 153,000원 */
-    var lp2Cost=153000;
-    total+=lp2Cost;
-    lpHtml+='<div class="rr"><span class="lb">탁발+꽝시폭포+코끼리캠프+물소농장 투어</span><span>'+fmt(lp2Cost)+'</span></div>';
-    /* 선상 보트 */
-    if(selActs['lp-boat']){
-      total+=LP_BOAT;
-      lpHtml+='<div class="rr"><span class="lb">선상 프라이빗 보트 렌트</span><span>'+fmt(LP_BOAT)+'</span></div>';
+    /* 도착일 역사 픽업·저녁 투어 차량 (모든 루트 공통) */
+    total+=LP_TOUR_D1_COST;
+    lpHtml+='<div class="rr"><span class="lb">루앙프라방 역사 픽업 · 저녁 투어 차량</span><span>'+fmt(LP_TOUR_D1_COST)+'</span></div>';
+
+    if(cur==='bl'){
+      /* bl: 2일차 탁발+꽝시+코끼리 153,000 */
+      total+=153000;
+      lpHtml+='<div class="rr"><span class="lb">탁발+꽝시폭포+코끼리캠프+물소농장 투어</span><span>153,000원</span></div>';
+      if(selActs['lp-boat']){ total+=LP_BOAT; lpHtml+='<div class="rr"><span class="lb">선상 프라이빗 보트 렌트</span><span>'+fmt(LP_BOAT)+'</span></div>'; }
+      /* 출국일: 빡우+위스키+시내유적지 112,000 */
+      total+=112000;
+      lpHtml+='<div class="rr"><span class="lb">빡우동굴+위스키마을+시내 유적지 투어</span><span>112,000원</span></div>';
+      /* 숙소→역사 드롭 25,000 */
+      total+=25000;
+      lpHtml+='<div class="rr"><span class="lb">숙소 → 루앙프라방 역사 드롭</span><span>25,000원</span></div>';
+      /* 가이드 2일 */
+      total+=93000*2;
+      lpHtml+='<div class="rr"><span class="lb">루앙프라방 현지 가이드 (2일)</span><span>'+fmt(93000*2)+'</span></div>';
     }
-    /* 3일차 (3박) */
-    if(r.lpN>=3){
-      total+=LP_TOUR_D3_COST;
-      lpHtml+='<div class="rr"><span class="lb">빡우동굴+위스키마을 투어</span><span>'+fmt(LP_TOUR_D3_COST)+'</span></div>';
+    else if(cur==='blll'){
+      /* blll: 2일차 탁발+꽝시+코끼리 153,000 */
+      total+=153000;
+      lpHtml+='<div class="rr"><span class="lb">탁발+꽝시폭포+코끼리캠프+물소농장 투어</span><span>153,000원</span></div>';
+      if(selActs['lp-boat']){ total+=LP_BOAT; lpHtml+='<div class="rr"><span class="lb">선상 프라이빗 보트 렌트</span><span>'+fmt(LP_BOAT)+'</span></div>'; }
+      /* 3일차: 빡우+위스키+시내유적지 112,000 */
+      total+=112000;
+      lpHtml+='<div class="rr"><span class="lb">빡우동굴+위스키마을+시내 유적지 투어</span><span>112,000원</span></div>';
+      /* 출국일: 숙소→역사 드롭 25,000 */
+      total+=25000;
+      lpHtml+='<div class="rr"><span class="lb">숙소 → 루앙프라방 역사 드롭</span><span>25,000원</span></div>';
+      /* 가이드 3일 */
+      total+=93000*3;
+      lpHtml+='<div class="rr"><span class="lb">루앙프라방 현지 가이드 (3일)</span><span>'+fmt(93000*3)+'</span></div>';
     }
-    /* 출발일 시내유적지 → 역사 드롭 111,000원 */
-    total+=111000;
-    lpHtml+='<div class="rr"><span class="lb">시내 유적지 투어 → 역사 드롭</span><span>111,000원</span></div>';
-    /* 루앙 현지 가이드 */
-    var lpGuideCost=93000*r.lpN;
-    total+=lpGuideCost;
-    lpHtml+='<div class="rr"><span class="lb">루앙프라방 현지 가이드 ('+r.lpN+'일)</span><span>'+fmt(lpGuideCost)+'</span></div>';
+    else if(cur==='bllb'){
+      /* bllb: 2일차(루앙) 탁발+꽝시+코끼리 153,000, 방비엥 역사→호텔 썽태우 15,000 */
+      total+=153000;
+      lpHtml+='<div class="rr"><span class="lb">탁발+꽝시폭포+코끼리캠프+물소농장 투어</span><span>153,000원</span></div>';
+      /* 가이드 1일 */
+      total+=93000*1;
+      lpHtml+='<div class="rr"><span class="lb">루앙프라방 현지 가이드 (1일)</span><span>'+fmt(93000)+'</span></div>';
+    }
+    else if(cur==='bllbb'){
+      /* bllbb: 2일차 탁발+꽝시+코끼리+시내유적지 153,000, 선상 옵션 */
+      total+=153000;
+      lpHtml+='<div class="rr"><span class="lb">탁발+꽝시폭포+코끼리캠프+물소농장+시내 유적지 투어</span><span>153,000원</span></div>';
+      if(selActs['lp-boat']){ total+=LP_BOAT; lpHtml+='<div class="rr"><span class="lb">선상 프라이빗 보트 렌트</span><span>'+fmt(LP_BOAT)+'</span></div>'; }
+      /* 숙소→역사 드롭 25,000 */
+      total+=25000;
+      lpHtml+='<div class="rr"><span class="lb">숙소 → 루앙프라방 역사 드롭</span><span>25,000원</span></div>';
+      /* 가이드 1일 */
+      total+=93000*1;
+      lpHtml+='<div class="rr"><span class="lb">루앙프라방 현지 가이드 (1일)</span><span>'+fmt(93000)+'</span></div>';
+    }
   }
   if(!lpHtml) lpHtml='<div class="rr"><span class="lb" style="color:rgba(255,255,255,.5)">해당 루트 없음</span><span></span></div>';
   document.getElementById('r-lp').innerHTML=lpHtml;
