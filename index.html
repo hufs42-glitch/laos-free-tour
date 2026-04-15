@@ -290,7 +290,9 @@ var LP_HOTEL={n:'앙통 호텔',usd:60};
 /* 방비엥 반일 */
 var VV_HALF=[
   {id:'vh1',n:'버기카(2인 1대) + 블루라군 1+3',sub:'반일 · 대당 71,000원 · 길 안내 가이드 포함',krw:71000,perCar:true},
-  {id:'vh2',n:'짚라인 + 카약',sub:'반일 · 인당',krw:29000}
+  {id:'vh2',n:'짚라인 + 카약',sub:'반일 · 인당',krw:29000},
+  {id:'vh3',n:'카약 + 물동굴(탐논)',sub:'반일 · 인당',krw:18000},
+  {id:'vh4',n:'짚라인 + 물동굴(탐논)',sub:'반일 · 인당',krw:28000}
 ];
 /* 방비엥 전일 */
 var VV_FULL=[
@@ -312,8 +314,10 @@ var LP_TOUR_D3_TO_TRAIN=86000; /* 시내유적지 → 기차역 */
 var LP_BOAT=93000; /* 선상 보트 1대 */
 
 /* 열차 */
-var TRAIN_VTE_LP=49000; /* 인당 비엔→루앙 */
-var TRAIN_LP_VV=28200;  /* 인당 루앙→방비엥 */
+var TRAIN_VTE_LP=49000;   /* 인당 비엔↔루앙 1등석 */
+var TRAIN_LP_VV=28200;    /* 인당 루앙→방비엥 1등석 */
+var TRAIN_VTE_LP_2=33900; /* 인당 비엔↔루앙 2등석 */
+var TRAIN_LP_VV_2=20700;  /* 인당 루앙→방비엥 2등석 */
 var CAR_VTE_VV=186000;  /* 비엔↔방비엥 전용차 1회 */
 
 /* 루트 */
@@ -367,10 +371,19 @@ function buildHotels(){
     html+='<div class="f" style="margin-bottom:8px"><label>루앙프라방 숙소 ('+r.lpN+'박) — 앙통 호텔 고정</label>';
     html+='<input type="text" value="앙통 호텔 — $60/룸" readonly style="background:#f5f5f5;color:#888"/></div>';
   }
-  html+='<div class="f"><label>객실 타입</label><div class="rg" id="rg-room" style="flex-wrap:nowrap;gap:8px">';
-  html+='<label class="on"><input type="radio" name="roomtype" value="double" checked onchange="updateRg(\'rg-room\');calc()"> 2인 1실 (기본)</label>';
-  html+='<label><input type="radio" name="roomtype" value="single" onchange="updateRg(\'rg-room\');calc()"> 1인 1실</label>';
+  html+='<div class="f"><label>객실 타입</label><div class="rg" id="rg-room" style="display:flex;flex-wrap:nowrap;gap:8px;width:100%">';
+  html+='<label style="flex:1;justify-content:center;text-align:center;white-space:nowrap" class="on"><input type="radio" name="roomtype" value="double" checked onchange="updateRg(\'rg-room\');calc()"> 2인 1실 (기본)</label>';
+  html+='<label style="flex:1;justify-content:center;text-align:center;white-space:nowrap"><input type="radio" name="roomtype" value="single" onchange="updateRg(\'rg-room\');calc()"> 1인 1실</label>';
   html+='</div></div>';
+  if(r.lpN>0){
+    html+='<div class="f" style="margin-top:8px"><label>고속열차 등급</label>';
+    html+='<div class="rg" id="rg-train" style="display:flex;flex-wrap:nowrap;gap:8px;width:100%;margin-top:4px">';
+    html+='<label style="flex:1;justify-content:center;text-align:center;white-space:nowrap" class="on"><input type="radio" name="trainclass" value="first" checked onchange="updateRg(\'rg-train\');calc()"> 1등석 (기본)</label>';
+    html+='<label style="flex:1;justify-content:center;text-align:center;white-space:nowrap"><input type="radio" name="trainclass" value="second" onchange="updateRg(\'rg-train\');calc()"> 2등석</label>';
+    html+='</div>';
+    html+='<div style="font-size:11px;color:#888;margin-top:4px">1등석: 비↔루 49,000원/인, 루→방 28,200원/인 &nbsp;|&nbsp; 2등석: 비↔루 33,900원/인, 루→방 20,700원/인</div>';
+    html+='</div>';
+  }
   document.getElementById('hotel-fields').innerHTML=html;
 }
 
@@ -398,7 +411,7 @@ function buildSchedule(){
       '<div class="info-box"><strong>비엔티안 오전</strong> : 숙소 픽업 → 4대 유적지 투어 (현지 가이드 동행) → 방비엥 이동</div>'+
       '<div class="info-box">입장료 현장 개별 납부 : 탓루왕 · 빠뚜싸이 · 허파깨우 · 왓시사켓 각 30,000킵/인</div>'+
       '<div class="info-box"><strong>방비엥 오후 도착</strong> : 숙소 체크인 후 오후 반일 액티비티 선택</div>'+
-      '<div class="act-section-title">오후 반일 액티비티 선택 (1가지)</div>'+
+      '<div class="act-section-title">오후 반일 액티비티 선택 (4가지 중 1가지)</div>'+
       '<div class="act-grid">'+VV_HALF.map(function(a){
         var price=a.perCar?fmt(a.krw*Math.ceil(pax/2))+'('+Math.ceil(pax/2)+'대)':fmt(a.krw*pax);
         return makeActItem('vv1_'+a.id,a.n,a.sub,price);
@@ -553,7 +566,7 @@ function buildSchedule(){
       '<span class="city-tag">📍 루앙프라방 → 방비엥</span>'+
       '<div class="info-box"><strong>루앙프라방 오전</strong> : 자유 시간 → 숙소 픽업 → 루앙프라방 역사 이동</div>'+
       '<div class="info-box"><strong>방비엥 오후 도착</strong> : 고속열차 이용 → 방비엥 도착 → 숙소 체크인 후 반일 액티비티</div>'+
-      '<div class="act-section-title">오후 반일 액티비티 선택</div>'+
+      '<div class="act-section-title">오전 / 오후 반일 액티비티 선택 (4가지 중 1가지)</div>'+
       '<div class="act-grid">'+VV_HALF.map(function(a){
         var price=a.perCar?fmt(a.krw*Math.ceil(pax/2))+'('+Math.ceil(pax/2)+'대)':fmt(a.krw*pax);
         return makeActItem('vv1_'+a.id,a.n,a.sub,price);
@@ -679,19 +692,26 @@ function calc(){
     transHtml+='<div class="rr"><span class="lb">비엔티안↔방비엥 전용차량 (왕복)</span><span>'+fmt(CAR_VTE_VV*2)+'</span></div>';
   }
   if(cur==='bl'||cur==='blll'){
-    var t1=TRAIN_VTE_LP*pax*2;
+    var tcEl=document.querySelector('input[name=trainclass]:checked');
+    var tc=tcEl?tcEl.value:'first';
+    var trainRate=tc==='second'?TRAIN_VTE_LP_2:TRAIN_VTE_LP;
+    var trainLabel=tc==='second'?'2등석':'1등석';
+    var t1=trainRate*pax*2;
     total+=t1;
-    transHtml+='<div class="rr"><span class="lb">고속열차 비엔티안↔루앙프라방 (1등석×'+pax+'명×2)</span><span>'+fmt(t1)+'</span></div>';
+    transHtml+='<div class="rr"><span class="lb">고속열차 비엔티안↔루앙프라방 ('+trainLabel+'×'+pax+'명×2)</span><span>'+fmt(t1)+'</span></div>';
     total+=82500;
     transHtml+='<div class="rr"><span class="lb">출국일 비엔티안 역사 픽업 후 불상공원 관람 후 시내·공항 드롭 차량</span><span>82,500원</span></div>';
   }
   if(cur==='bllb'||cur==='bllbb'){
-    var t2=TRAIN_VTE_LP*pax;
+    var tcEl2=document.querySelector('input[name=trainclass]:checked');
+    var tc2=tcEl2?tcEl2.value:'first';
+    var trainLabel2=tc2==='second'?'2등석':'1등석';
+    var t2=(tc2==='second'?TRAIN_VTE_LP_2:TRAIN_VTE_LP)*pax;
     total+=t2;
-    transHtml+='<div class="rr"><span class="lb">고속열차 비엔티안→루앙프라방 (1등석×'+pax+'명)</span><span>'+fmt(t2)+'</span></div>';
-    var t3=TRAIN_LP_VV*pax;
+    transHtml+='<div class="rr"><span class="lb">고속열차 비엔티안→루앙프라방 ('+trainLabel2+'×'+pax+'명)</span><span>'+fmt(t2)+'</span></div>';
+    var t3=(tc2==='second'?TRAIN_LP_VV_2:TRAIN_LP_VV)*pax;
     total+=t3;
-    transHtml+='<div class="rr"><span class="lb">고속열차 루앙프라방→방비엥 (1등석×'+pax+'명)</span><span>'+fmt(t3)+'</span></div>';
+    transHtml+='<div class="rr"><span class="lb">고속열차 루앙프라방→방비엥 ('+trainLabel2+'×'+pax+'명)</span><span>'+fmt(t3)+'</span></div>';
     total+=CAR_VTE_VV;
     transHtml+='<div class="rr"><span class="lb">방비엥→비엔티안 전용차량</span><span>'+fmt(CAR_VTE_VV)+'</span></div>';
   }
