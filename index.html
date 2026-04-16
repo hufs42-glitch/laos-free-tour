@@ -620,7 +620,7 @@ function buildSchedule(){
       '<div class="act-section-title">오전 반일 액티비티 선택</div>'+
       '<div class="act-grid">'+VV_HALF.map(function(a){
         var price=a.perCar?fmt(a.krw*Math.ceil(pax/2))+'('+Math.ceil(pax/2)+'대)':fmt(a.krw*pax);
-        return makeActItem('vv1_'+a.id,a.n,a.sub,price);
+        return makeActItem('vv3_'+a.id,a.n,a.sub,price);
       }).join('')+'</div>';
     html+=makeDay(dayNum++,'방비엥 + 비엔티안 복귀 출국','방비엥 → 비엔티안',bllbbD5,false);
   }
@@ -797,6 +797,7 @@ function calc(){
       total+=15000;
       vvHtml+='<div class="rr"><span class="lb">방비엥 역사 → 호텔 드롭 (썽태우)</span><span>15,000원</span></div>';
     }
+    /* vv1_: 도착일 반일 액티비티 (bb DAY2, bllb DAY4) */
     VV_HALF.forEach(function(a){
       var k='vv1_'+a.id;
       if(selActs[k]){
@@ -811,15 +812,15 @@ function calc(){
         total+=cv; vvHtml+='<div class="rr"><span class="lb">'+a.n+'</span><span>'+fmt(cv)+'</span></div>';
       }
     });
-  }
-    /* vv3_: bllb/bllbb DAY5 반일 (출국일) */
+    /* vv3_: bllbb DAY5 반일 (출국일) */
     VV_HALF.forEach(function(a){
       var k='vv3_'+a.id;
       if(selActs[k]){
         var cv=a.perCar?a.krw*Math.ceil(pax/2):a.krw*pax;
-        total+=cv; vvHtml+='<div class="rr"><span class="lb">'+a.n+' (출국일)</span><span>'+fmt(cv)+'</span></div>';
+        total+=cv; vvHtml+='<div class="rr"><span class="lb">'+a.n+' (출국일 반일)</span><span>'+fmt(cv)+'</span></div>';
       }
     });
+  }
   if(!vvHtml) vvHtml='<div class="rr"><span class="lb" style="color:rgba(255,255,255,.5)">'+(r.vvN>0?'선택된 액티비티 없음':'해당 루트 없음')+'</span><span></span></div>';
   document.getElementById('r-vv').innerHTML=vvHtml;
 
