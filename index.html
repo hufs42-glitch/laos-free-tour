@@ -282,8 +282,8 @@ var VTE_HOTELS=[
 ];
 var VV_HOTELS=[
   {n:'실버나가 호텔',usd:60},
-  {n:'아마리 방비엥 (디럭스)',usd:85},
-  {n:'아마리 방비엥 (스위트)',usd:120}
+  {n:'아마리 방비엥 (슈페리어 시티뷰)',usd:90},
+  {n:'아마리 방비엥 (슈페리어 리버뷰)',usd:100}
 ];
 var LP_HOTEL={n:'앙통 호텔',usd:60};
 
@@ -667,7 +667,21 @@ function toggleDay(bodyId,header){
 }
 
 function toggleAct(id){
-  selActs[id]=!selActs[id];
+  /* 같은 prefix 그룹(vv1_, vv2_, vv3_)은 라디오처럼 1개만 선택 */
+  var prefix=id.match(/^(vv[0-9]+_)/);
+  if(prefix){
+    var p=prefix[1];
+    Object.keys(selActs).forEach(function(k){
+      if(k!==id && k.indexOf(p)===0 && selActs[k]){
+        selActs[k]=false;
+        var el2=document.getElementById('ai-'+k);
+        if(el2) el2.classList.remove('sel');
+      }
+    });
+    selActs[id]=!selActs[id];
+  } else {
+    selActs[id]=!selActs[id];
+  }
   var el=document.getElementById('ai-'+id);
   if(el) el.classList.toggle('sel',selActs[id]);
   calc();
@@ -729,7 +743,7 @@ function calc(){
 
   if(cur==='bb'){
     total+=CAR_VTE_VV*2;
-    transHtml+='<div class="rr"><span class="lb">비엔티안↔방비엥 전용차량 (왕복)</span><span>'+fmt(CAR_VTE_VV*2)+'</span></div>';
+    transHtml+='<div class="rr"><span class="lb">비엔티안↔방비엥 전용차량 (왕복) · 공항 샌딩 포함</span><span>'+fmt(CAR_VTE_VV*2)+'</span></div>';
   }
   if(cur==='bl'||cur==='blll'){
     var tcEl=document.querySelector('input[name=trainclass]:checked');
@@ -739,8 +753,8 @@ function calc(){
     var t1=trainRate*pax*2;
     total+=t1;
     transHtml+='<div class="rr"><span class="lb">고속열차 비엔티안↔루앙프라방 ('+trainLabel+' × '+pax+'명 × 2회)</span><span>'+fmt(t1)+'</span></div>';
-    total+=82500;
-    transHtml+='<div class="rr"><span class="lb">출국일 비엔티안 역사 픽업 후 불상공원 관람 후 시내·공항 드롭 차량</span><span>82,500원</span></div>';
+    total+=50000;
+    transHtml+='<div class="rr"><span class="lb">출국일 비엔티안 역사 픽업 후 시내 복귀 · 자유시간 후 공항 드롭</span><span>50,000원</span></div>';
   }
   if(cur==='bllb'||cur==='bllbb'){
     /* 비엔티안→루앙프라방 등급 */
@@ -798,6 +812,14 @@ function calc(){
       }
     });
   }
+    /* vv3_: bllb/bllbb DAY5 반일 (출국일) */
+    VV_HALF.forEach(function(a){
+      var k='vv3_'+a.id;
+      if(selActs[k]){
+        var cv=a.perCar?a.krw*Math.ceil(pax/2):a.krw*pax;
+        total+=cv; vvHtml+='<div class="rr"><span class="lb">'+a.n+' (출국일)</span><span>'+fmt(cv)+'</span></div>';
+      }
+    });
   if(!vvHtml) vvHtml='<div class="rr"><span class="lb" style="color:rgba(255,255,255,.5)">'+(r.vvN>0?'선택된 액티비티 없음':'해당 루트 없음')+'</span><span></span></div>';
   document.getElementById('r-vv').innerHTML=vvHtml;
 
@@ -834,9 +856,9 @@ function calc(){
       /* 출국일: 숙소→역사 드롭 25,000 */
       total+=25000;
       lpHtml+='<div class="rr"><span class="lb">숙소 → 루앙프라방 역사 드롭</span><span>25,000원</span></div>';
-      /* 가이드 3일 */
-      total+=93000*3;
-      lpHtml+='<div class="rr"><span class="lb">루앙프라방 현지 가이드 (3일)</span><span>'+fmt(93000*3)+'</span></div>';
+      /* 가이드 2일 */
+      total+=93000*2;
+      lpHtml+='<div class="rr"><span class="lb">루앙프라방 현지 가이드 (2일)</span><span>'+fmt(93000*2)+'</span></div>';
     }
     else if(cur==='bllb'){
       /* bllb: 2일차(루앙) 탁발+꽝시+코끼리 153,000, 방비엥 역사→호텔 썽태우 15,000 */
